@@ -1,4 +1,10 @@
-<form class="search-bar" action="<?= e(url('rooms.php')) ?>" method="get">
+<form
+    class="search-bar"
+    action="<?= e(url('rooms.php')) ?>"
+    method="get"
+>
+    <input type="hidden" name="search" value="1">
+
     <label>
         NGÀY NHẬN PHÒNG
         <input
@@ -49,5 +55,7 @@
         </select>
     </label>
 
-    <button class="button" type="submit">TÌM PHÒNG TRỐNG ↗</button>
+    <button class="button" type="submit">
+        TÌM PHÒNG TRỐNG ↗
+    </button>
 </form>

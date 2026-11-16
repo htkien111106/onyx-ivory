@@ -71,6 +71,45 @@ if (post()) {
 
             audit('promotion_create', 'Tạo mã ' . $code);
             $message = 'Đã tạo chương trình ' . $code . '.';
+        } elseif ($action === 'edit') {
+            $id = (int) input('promotion_id');
+            $code = promotion_normalize_code(input('code'));
+            $name = input('title');
+            $percentText = input('discount_percent');
+            $minimumText = input('min_room_total');
+            $start = input('starts_on');
+            $end = input('ends_on');
+
+            $promotion = query(
+                'SELECT id, code FROM promotions WHERE id = ? FOR UPDATE',
+                [$id]
+            )->fetch();
+            if (!$promotion) {
+                throw new DomainException('Không tìm thấy chương trình.');
+            }
+            if (!preg_match('/^[A-Z0-9_-]{3,30}$/', $code)) {
+                throw new DomainException('Mã cần từ 3 đến 30 ký tự, gồm chữ A–Z, số, dấu - hoặc _.');
+            }
+            if (mb_strlen($name) < 3 || mb_strlen($name) > 120) {
+                throw new DomainException('Tên chương trình cần từ 3 đến 120 ký tự.');
+            }
+            if (!ctype_digit($percentText) || (int) $percentText < 1 || (int) $percentText > 100) {
+                throw new DomainException('Mức giảm phải từ 1% đến 100%.');
+            }
+            if (!ctype_digit($minimumText) || strlen($minimumText) > 12) {
+                throw new DomainException('Tiền phòng tối thiểu phải là số nguyên không âm, tối đa 12 chữ số.');
+            }
+            if (!promotion_valid_date($start) || !promotion_valid_date($end) || $end < $start) {
+                throw new DomainException('Ngày kết thúc phải bằng hoặc sau ngày bắt đầu.');
+            }
+
+            query(
+                'UPDATE promotions SET code = ?, title = ?, discount_percent = ?,
+                    min_room_total = ?, starts_on = ?, ends_on = ? WHERE id = ?',
+                [$code, $name, (int) $percentText, (int) $minimumText, $start, $end, $id]
+            );
+            audit('promotion_edit', 'Chỉnh sửa chương trình ' . $code);
+            $message = 'Đã cập nhật chương trình ' . $code . '.';
         } elseif ($action === 'set_active') {
             $id = (int) input('promotion_id');
             $target = input('active');

@@ -1,7 +1,6 @@
 <?php
 $title = $title ?? 'Một chốn riêng, một dấu ấn';
 
-// Tạo URL tài nguyên có phiên bản để tránh trình duyệt giữ bản cũ.
 $headerAssetUrl = static function (string $path): string {
     $file = __DIR__ . '/../' . $path;
 
@@ -20,7 +19,22 @@ $headerWorkspace = $workspaceMode ?? '';
 $headerIsAdmin = $headerWorkspace === 'admin';
 $headerIsStaffPage = !empty($isAdminPath);
 
-// Kiểm tra phiên đăng nhập nhân viên.
+$headerIsHome = $uiPage === 'index' && !$headerIsStaffPage;
+$headerIsRooms = $uiPage === 'rooms' && !$headerIsStaffPage;
+
+$headerIsMemberPage = !$headerIsStaffPage && in_array(
+    $uiPage,
+    [
+        'account',
+        'membership',
+        'change-password',
+        'booking-detail',
+        'booking-change',
+        'booking-payment',
+    ],
+    true
+);
+
 $headerStaff = actor();
 $headerCustomer = null;
 
@@ -47,6 +61,13 @@ if (!$headerStaff && !empty($_SESSION['customer_id'])) {
 
         $headerCustomer = null;
     }
+}
+
+$headerFlashMessage = '';
+
+if (!empty($_SESSION['flash'])) {
+    $headerFlashMessage = (string) $_SESSION['flash'];
+    unset($_SESSION['flash']);
 }
 ?>
 <!doctype html>
@@ -77,7 +98,6 @@ if (!$headerStaff && !empty($_SESSION['customer_id'])) {
         href="<?= e($headerAssetUrl('assets/style.css')) ?>"
     >
 
-    <!-- Kiểu cơ bản của menu; CSS khu vực quản trị nạp sau. -->
     <style>
         .skip-link {
             position: fixed;
@@ -213,10 +233,213 @@ if (!$headerStaff && !empty($_SESSION['customer_id'])) {
             >
         <?php endif; ?>
     <?php endif; ?>
+
+    <?php if ($headerIsHome): ?>
+        <link
+            rel="stylesheet"
+            href="<?= e($headerAssetUrl('assets/hotel-home.css')) ?>"
+        >
+
+        <script
+            src="<?= e($headerAssetUrl('assets/hotel-home.js')) ?>"
+            defer
+        ></script>
+    <?php endif; ?>
+
+    <?php if ($headerIsRooms): ?>
+        <link
+            rel="stylesheet"
+            href="<?= e($headerAssetUrl('assets/hotel-rooms.css')) ?>"
+        >
+    <?php endif; ?>
+
+    <?php if ($uiPage === 'room' && !$headerIsStaffPage): ?>
+        <link
+            rel="stylesheet"
+            href="<?= e($headerAssetUrl('assets/hotel-room-detail.css')) ?>"
+        >
+
+        <script
+            src="<?= e($headerAssetUrl('assets/hotel-room-detail.js')) ?>"
+            defer
+        ></script>
+    <?php endif; ?>
+
+    <?php if ($uiPage === 'booking' && !$headerIsStaffPage): ?>
+        <link
+            rel="stylesheet"
+            href="<?= e($headerAssetUrl('assets/hotel-booking.css')) ?>"
+        >
+    <?php endif; ?>
+
+    <?php if (
+        !$headerIsStaffPage
+        && in_array($uiPage, ['lookup', 'login', 'register'], true)
+    ): ?>
+        <link
+            rel="stylesheet"
+            href="<?= e($headerAssetUrl('assets/hotel-customer-pages.css')) ?>"
+        >
+    <?php endif; ?>
+
+    <?php if ($headerIsMemberPage): ?>
+        <link
+            rel="stylesheet"
+            href="<?= e($headerAssetUrl('assets/hotel-member.css')) ?>"
+        >
+    <?php endif; ?>
+
+    <style>
+        /* Thông báo nổi */
+        #hotel-toast {
+            position: fixed;
+            inset: auto 24px 24px auto;
+            z-index: 3000;
+
+            display: grid;
+            grid-template-columns: 34px minmax(0, 1fr) 28px;
+            align-items: start;
+            gap: 12px;
+
+            width: min(420px, calc(100vw - 32px));
+            max-height: calc(100dvh - 48px);
+            overflow-y: auto;
+            margin: 0;
+            padding: 20px;
+
+            border: 1px solid #dfd3bd;
+            border-left: 3px solid #b28b46;
+            border-radius: 6px;
+            background: #fffdf8;
+            color: #443c31;
+            box-shadow: 0 12px 36px rgb(0 0 0 / 18%);
+
+            font-family: Arial, sans-serif;
+            text-align: left;
+
+            animation: hotel-toast-enter 350ms ease-out;
+            transition: opacity 200ms ease, translate 200ms ease;
+        }
+
+        #hotel-toast,
+        #hotel-toast * {
+            box-sizing: border-box;
+            font-style: normal;
+        }
+
+        #hotel-toast .hotel-toast-icon {
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border: 1px solid #dfd3bd;
+            border-radius: 50%;
+            background: #f4eee2;
+            color: #97723b;
+        }
+
+        #hotel-toast .hotel-toast-icon svg {
+            display: block;
+            width: 18px;
+            height: 18px;
+        }
+
+        #hotel-toast .hotel-toast-title {
+            display: block;
+            margin: 0 0 5px;
+            color: #51412c;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.6;
+            letter-spacing: 1.5px;
+        }
+
+        #hotel-toast .hotel-toast-message {
+            margin: 0;
+            padding: 0;
+            color: #645b50;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7;
+            text-align: left;
+            overflow-wrap: anywhere;
+        }
+
+        #hotel-toast .hotel-toast-close {
+            position: static;
+            display: grid;
+            place-items: center;
+
+            width: 28px;
+            height: 28px;
+            min-width: 0;
+            min-height: 0;
+            margin: -4px -4px 0 0;
+            padding: 0;
+
+            border: 0;
+            border-radius: 50%;
+            background: transparent;
+            color: #8b7d68;
+            box-shadow: none;
+
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: 400;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        #hotel-toast .hotel-toast-close:hover {
+            background: #f0e9dd;
+            color: #443c31;
+        }
+
+        #hotel-toast .hotel-toast-close:focus-visible {
+            outline: 2px solid #a48249;
+            outline-offset: 3px;
+        }
+
+        #hotel-toast.is-closing {
+            opacity: 0;
+            translate: 0 12px;
+            pointer-events: none;
+        }
+
+        @keyframes hotel-toast-enter {
+            from {
+                opacity: 0;
+                translate: 0 16px;
+            }
+
+            to {
+                opacity: 1;
+                translate: 0 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #hotel-toast {
+                right: 16px;
+                bottom: calc(16px + env(safe-area-inset-bottom));
+                padding: 16px;
+                gap: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #hotel-toast {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
 </head>
 
 <body
-    class="site-ui page-<?= e($uiPage) ?><?= $headerIsStaffPage ? ' staff-page' : '' ?>"
+    class="site-ui page-<?= e($uiPage) ?><?= $headerIsStaffPage ? ' staff-page' : '' ?><?= $headerIsMemberPage ? ' member-ui' : '' ?>"
     <?php if (isset($workspaceMode)): ?>
         data-ui-workspace="<?= e($headerWorkspace) ?>"
     <?php endif; ?>
@@ -232,9 +455,7 @@ if (!$headerStaff && !empty($_SESSION['customer_id'])) {
 
 <header class="site-header">
     <a class="brand" href="<?= e(url('index.php')) ?>">
-        <span class="brand-symbol">
-            O<span>&amp;</span>I
-        </span>
+        <span class="brand-symbol">O<span>&amp;</span>I</span>
 
         <span>
             THE ONYX &amp; IVORY
@@ -316,34 +537,33 @@ if (!$headerStaff && !empty($_SESSION['customer_id'])) {
             >
                 <?= csrf() ?>
 
-                <button type="submit" class="nav-logout-button">
+                <button
+                    type="submit"
+                    class="nav-logout-button"
+                >
                     Đăng xuất
                 </button>
             </form>
         <?php endif; ?>
-
-        <a class="button" href="<?= e(url('rooms.php')) ?>">
-            ĐẶT PHÒNG ↗
-        </a>
     </nav>
 </header>
 
-<?php if (!empty($_SESSION['flash'])): ?>
-    <div id="flash-message" class="notice success" role="status">
-        <?= e($_SESSION['flash']) ?>
-    </div>
+<?php if ($headerFlashMessage !== ''): ?>
+    <?php if ($headerIsStaffPage): ?>
+        <div
+            id="flash-message"
+            class="notice success"
+            role="status"
+        >
+            <?= e($headerFlashMessage) ?>
+        </div>
 
-    <?php unset($_SESSION['flash']); ?>
-
-    <script>
+        <script>
         document.addEventListener('DOMContentLoaded', () => {
             const message = document.getElementById('flash-message');
-
             if (!message) return;
 
-            // usability.js phụ trách nút đóng.
-            // Header phụ trách tự ẩn thông báo sau 5 giây.
-            setTimeout(() => {
+            window.setTimeout(() => {
                 if (!message.isConnected) return;
 
                 const reducedMotion = window.matchMedia(
@@ -355,13 +575,167 @@ if (!$headerStaff && !empty($_SESSION['customer_id'])) {
                     return;
                 }
 
-                message.style.transition = 'opacity 0.4s ease';
+                message.style.transition = 'opacity 400ms ease';
                 message.style.opacity = '0';
 
-                setTimeout(() => message.remove(), 400);
+                window.setTimeout(() => message.remove(), 400);
             }, 5000);
         }, { once: true });
-    </script>
+        </script>
+
+    <?php else: ?>
+        <div id="hotel-toast">
+            <span class="hotel-toast-icon" aria-hidden="true">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <circle cx="12" cy="7" r="1"></circle>
+                    <path d="M12 11v6"></path>
+                </svg>
+            </span>
+
+            <div role="status" aria-live="polite" aria-atomic="true">
+                <span class="hotel-toast-title">
+                    THE ONYX &amp; IVORY
+                </span>
+
+                <p class="hotel-toast-message">
+                    <?= e($headerFlashMessage) ?>
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="hotel-toast-close"
+                aria-label="Đóng thông báo"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <script>
+        (() => {
+            const toast = document.getElementById('hotel-toast');
+            if (!toast) return;
+
+            const closeButton = toast.querySelector('.hotel-toast-close');
+            const reducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            );
+
+            let timer;
+            let remaining = 6000;
+            let startedAt = 0;
+            let hovering = false;
+            let focused = false;
+            let closing = false;
+
+            function dismiss() {
+                if (closing || !toast.isConnected) return;
+
+                closing = true;
+                window.clearTimeout(timer);
+
+                document.removeEventListener(
+                    'visibilitychange',
+                    handleVisibility
+                );
+
+                if (toast.contains(document.activeElement)) {
+                    document.getElementById('main-content')?.focus({
+                        preventScroll: true
+                    });
+                }
+
+                if (reducedMotion.matches) {
+                    toast.remove();
+                    return;
+                }
+
+                toast.classList.add('is-closing');
+                window.setTimeout(() => toast.remove(), 220);
+            }
+
+            function pause() {
+                if (timer === undefined) return;
+
+                window.clearTimeout(timer);
+                timer = undefined;
+
+                remaining = Math.max(
+                    0,
+                    remaining - (performance.now() - startedAt)
+                );
+            }
+
+            function resume() {
+                if (
+                    closing ||
+                    hovering ||
+                    focused ||
+                    document.hidden ||
+                    timer !== undefined
+                ) {
+                    return;
+                }
+
+                startedAt = performance.now();
+                timer = window.setTimeout(dismiss, remaining);
+            }
+
+            function handleVisibility() {
+                if (document.hidden) {
+                    pause();
+                } else {
+                    resume();
+                }
+            }
+
+            closeButton.addEventListener('click', dismiss);
+
+            toast.addEventListener('mouseenter', () => {
+                hovering = true;
+                pause();
+            });
+
+            toast.addEventListener('mouseleave', () => {
+                hovering = false;
+                resume();
+            });
+
+            toast.addEventListener('focusin', () => {
+                focused = true;
+                pause();
+            });
+
+            toast.addEventListener('focusout', (event) => {
+                if (toast.contains(event.relatedTarget)) return;
+
+                focused = false;
+                resume();
+            });
+
+            toast.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    dismiss();
+                }
+            });
+
+            document.addEventListener(
+                'visibilitychange',
+                handleVisibility
+            );
+
+            resume();
+        })();
+        </script>
+    <?php endif; ?>
 <?php endif; ?>
 
 <main id="main-content" tabindex="-1">

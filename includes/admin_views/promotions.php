@@ -3,15 +3,47 @@
     <?php catalog_toolbar('Tìm khuyến mãi',count($promotions),'Nhập tên chương trình hoặc mã…','#promotion-create',true); ?>
     <div class="table-wrap catalog-table-scroll"><table class="catalog-table"><thead><tr><th>Chương trình</th><th>Mức giảm / điều kiện</th><th>Thời gian áp dụng</th><th>Trạng thái</th><th class="catalog-action-cell">Hành động</th></tr></thead><tbody>
     <?php foreach($promotions as $promo):$promoId=(int)$promo['id'];$enabled=(bool)$promo['active'];$statusKey=!$enabled?'inactive':($today<$promo['starts_on']?'upcoming':($today>$promo['ends_on']?'expired':'active'));$statusText=!$enabled?'Tạm dừng':($today<$promo['starts_on']?'Sắp bắt đầu':($today>$promo['ends_on']?'Đã hết hạn':'Đang áp dụng')); ?>
-        <tr data-catalog-row data-search="<?= e($promo['title'].' '.$promo['code']) ?>" data-status="<?= e($statusKey) ?>" data-date-start="<?= e($promo['starts_on']) ?>" data-date-end="<?= e($promo['ends_on']) ?>"><td><span class="catalog-name"><?= e($promo['title']) ?></span><span class="catalog-secondary"><?= e($promo['code']) ?></span></td><td><strong><?= (int)$promo['discount_percent'] ?>%</strong><span class="catalog-secondary">Từ <?= money($promo['min_room_total']) ?></span></td><td><?= e(date('d/m/Y',strtotime($promo['starts_on']))) ?><span class="catalog-secondary">đến <?= e(date('d/m/Y',strtotime($promo['ends_on']))) ?></span></td><td><?php catalog_status($statusText,$statusKey==='active',$statusKey==='upcoming'?'pending':''); ?></td><td><div class="catalog-row-actions"><?php catalog_action('eye','Xem '.$promo['title'],'#promotion-view-'.$promoId);catalog_action('edit','Chỉnh trạng thái '.$promo['code'],'#promotion-status-'.$promoId);catalog_action($enabled?'trash':'power',$enabled?'Tạm dừng '.$promo['code']:'Bật lại '.$promo['code'],'#promotion-toggle-'.$promoId,$enabled); ?></div></td></tr>
+        <tr data-catalog-row data-search="<?= e($promo['title'].' '.$promo['code']) ?>" data-status="<?= e($statusKey) ?>" data-date-start="<?= e($promo['starts_on']) ?>" data-date-end="<?= e($promo['ends_on']) ?>"><td><span class="catalog-name"><?= e($promo['title']) ?></span><span class="catalog-secondary"><?= e($promo['code']) ?></span></td><td><strong><?= (int)$promo['discount_percent'] ?>%</strong><span class="catalog-secondary">Từ <?= money($promo['min_room_total']) ?></span></td><td><?= e(date('d/m/Y',strtotime($promo['starts_on']))) ?><span class="catalog-secondary">đến <?= e(date('d/m/Y',strtotime($promo['ends_on']))) ?></span></td><td><?php catalog_status($statusText,$statusKey==='active',$statusKey==='upcoming'?'pending':''); ?></td><td><div class="catalog-row-actions"><?php catalog_action('eye','Xem '.$promo['title'],'#promotion-view-'.$promoId);catalog_action('edit','Chỉnh sửa '.$promo['code'],'#promotion-edit-'.$promoId);catalog_action($enabled?'trash':'power',$enabled?'Tạm dừng '.$promo['code']:'Bật lại '.$promo['code'],'#promotion-toggle-'.$promoId,$enabled); ?></div></td></tr>
     <?php endforeach;catalog_empty(5,(bool)$promotions); ?>
     </tbody></table></div>
-    <p class="catalog-note">Khoảng ngày lọc theo thời gian chương trình có hiệu lực. Bấm bút chì để bật/tắt chương trình đang có; biểu tượng thùng rác tạm dừng mã. Các đơn đã áp dụng vẫn giữ ưu đãi đã chốt.</p>
+    <p class="catalog-note">Khoảng ngày lọc theo thời gian chương trình có hiệu lực. Bấm bút chì để sửa chi tiết chương trình; biểu tượng thùng rác tạm dừng mã. Các đơn đã áp dụng vẫn giữ ưu đãi đã chốt.</p>
     <?php foreach($promotions as $promo):$promoId=(int)$promo['id'];$target=(int)$promo['active']?0:1; ?>
         <?php catalog_dialog_start('promotion-view-'.$promoId,$promo['title'],$promo['code']);catalog_details(['Mã ưu đãi'=>$promo['code'],'Mức giảm'=>$promo['discount_percent'].'%','Tiền phòng tối thiểu'=>money($promo['min_room_total']),'Từ ngày'=>date('d/m/Y',strtotime($promo['starts_on'])),'Đến hết ngày'=>date('d/m/Y',strtotime($promo['ends_on'])),'Số đơn đang áp dụng'=>$promo['booking_count'],'Trạng thái'=>(int)$promo['active']?'Đang bật':'Tạm dừng']); ?><div class="catalog-dialog-actions"><button type="button" class="button outline" data-close-dialog>Đóng</button></div><?php catalog_dialog_end(); ?>
-        <?php catalog_dialog_start('promotion-status-'.$promoId,'Trạng thái khuyến mãi',$promo['title'].' · '.$promo['code'],false,true); ?>
-        <p>Thay đổi trạng thái áp dụng cho lượt đặt phòng tiếp theo. Các đơn đã tạo giữ nguyên ưu đãi đã được lưu.</p>
-        <form method="post"><?= csrf() ?><?php catalog_hidden(['action'=>'set_active','promotion_id'=>$promoId]); ?><label>Trạng thái<select name="active"><option value="1" <?= (int)$promo['active']===1?'selected':'' ?>>Bật chương trình</option><option value="0" <?= (int)$promo['active']===0?'selected':'' ?>>Tạm dừng chương trình</option></select></label><?php catalog_form_actions('Lưu trạng thái'); ?></form><?php catalog_dialog_end(); ?>
+        <?php
+        $editing = post() && input('action') === 'edit' && (int) input('promotion_id') === $promoId;
+        $field = static function (string $name) use ($editing, $promo): string {
+            return e($editing ? input($name) : (string) $promo[$name]);
+        };
+        catalog_dialog_start('promotion-edit-'.$promoId, 'Chỉnh sửa khuyến mãi',
+            $promo['title'].' · '.$promo['code'], $editing && $error !== '');
+        if ($editing) catalog_error($error);
+        ?>
+        <form method="post">
+            <?= csrf() ?>
+            <?php catalog_hidden(['action'=>'edit','promotion_id'=>$promoId]); ?>
+            <div class="form-grid">
+                <label class="catalog-span">Tên chương trình
+                    <input name="title" minlength="3" maxlength="120" value="<?= $field('title') ?>" required>
+                </label>
+                <label>Mã giảm giá
+                    <input name="code" minlength="3" maxlength="30" value="<?= $field('code') ?>" required>
+                </label>
+                <label>Mức giảm (%)
+                    <input type="number" name="discount_percent" min="1" max="100" step="1" value="<?= $field('discount_percent') ?>" required>
+                </label>
+                <label class="catalog-span">Tiền phòng tối thiểu (VND)
+                    <input type="number" name="min_room_total" min="0" max="999999999999" step="1" value="<?= $field('min_room_total') ?>" required>
+                </label>
+                <label>Áp dụng từ ngày
+                    <input type="date" name="starts_on" value="<?= $field('starts_on') ?>" required>
+                </label>
+                <label>Đến hết ngày
+                    <input type="date" name="ends_on" value="<?= $field('ends_on') ?>" required>
+                </label>
+            </div>
+            <?php catalog_form_actions('Lưu thay đổi'); ?>
+        </form>
+        <?php catalog_dialog_end(); ?>
         <?php catalog_dialog_start('promotion-toggle-'.$promoId,$target?'Bật lại khuyến mãi':'Tạm dừng khuyến mãi',$promo['code'],false,true); ?><p><?= $target?'Mã ưu đãi được bật lại theo thời gian và điều kiện đã có.':'Mã ưu đãi sẽ ngừng áp dụng cho đơn mới; các đơn đã đặt giữ nguyên ưu đãi đã lưu.' ?></p><form method="post"><?= csrf() ?><?php catalog_hidden(['action'=>'set_active','promotion_id'=>$promoId,'active'=>$target]);catalog_form_actions($target?'Bật lại':'Tạm dừng',!$target); ?></form><?php catalog_dialog_end(); ?>
     <?php endforeach; ?>
     <?php catalog_dialog_start('promotion-create','Tạo chương trình ưu đãi','Mã, mức giảm và thời gian có hiệu lực',post()&&input('action')==='create'&&$error!=='');catalog_error($error); ?>

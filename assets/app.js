@@ -182,3 +182,132 @@ if (desk) {
   desk.addEventListener("change", recalculateTotal);
   recalculateTotal();
 }
+/* Hiệu ứng xuất hiện cho danh sách phòng */
+(() => {
+  "use strict";
+
+  function initRoomsAnimation() {
+    if (!document.body.matches(".page-rooms:not(.staff-page)")) {
+      return;
+    }
+
+    const list = document.querySelector(".room-list");
+
+    if (!list || list.dataset.revealReady === "1") return;
+
+    list.dataset.revealReady = "1";
+
+    const cards = Array.from(list.querySelectorAll(".room-row"));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (
+      !cards.length ||
+      reducedMotion.matches ||
+      !("IntersectionObserver" in window)
+    ) {
+      return;
+    }
+
+    const animations = new Map();
+    const revealed = new WeakSet();
+
+    function reveal(card, delay = 0) {
+      if (revealed.has(card)) return;
+
+      revealed.add(card);
+
+      if (
+        reducedMotion.matches ||
+        typeof card.animate !== "function" ||
+        card.contains(document.activeElement)
+      ) {
+        return;
+      }
+
+      const animation = card.animate(
+        [
+          {
+            opacity: 0,
+            transform: "translateY(36px)",
+          },
+          {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+        ],
+        {
+          duration: 850,
+          delay,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          fill: "backwards",
+        },
+      );
+
+      animations.set(card, animation);
+
+      const cleanup = () => animations.delete(card);
+
+      animation.addEventListener("finish", cleanup, { once: true });
+      animation.addEventListener("cancel", cleanup, { once: true });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          })
+          .forEach((entry, index) => {
+            observer.unobserve(entry.target);
+            reveal(entry.target, Math.min(index, 2) * 120);
+          });
+      },
+      {
+        threshold: 0.08,
+      },
+    );
+
+    cards.forEach((card) => {
+      // Không chạy lại các phòng đã cuộn qua khi tải lại trang.
+      if (card.getBoundingClientRect().bottom <= 0) {
+        revealed.add(card);
+        return;
+      }
+
+      observer.observe(card);
+    });
+
+    // Hiển thị ngay nếu khách dùng bàn phím chọn vào thẻ phòng.
+    list.addEventListener("focusin", (event) => {
+      const card = event.target.closest(".room-row");
+
+      if (!card) return;
+
+      observer.unobserve(card);
+      revealed.add(card);
+      animations.get(card)?.cancel();
+    });
+
+    // Dừng hiệu ứng khi bật chế độ giảm chuyển động.
+    reducedMotion.addEventListener("change", (event) => {
+      if (!event.matches) return;
+
+      observer.disconnect();
+
+      for (const animation of Array.from(animations.values())) {
+        animation.cancel();
+      }
+
+      animations.clear();
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initRoomsAnimation, {
+      once: true,
+    });
+  } else {
+    initRoomsAnimation();
+  }
+})();
