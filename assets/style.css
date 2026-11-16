@@ -1732,3 +1732,33 @@ dialog.onyx-confirm {
   outline: 2px solid #846932;
   outline-offset: 3px;
 }
+
+/* Staff sidebar compact - same visual hierarchy as Admin */
+.workspace-shell[data-workspace-mode="staff"]{grid-template-columns:236px minmax(0,1fr);max-width:none;min-height:calc(100dvh - 78px)}
+.workspace-shell[data-workspace-mode="staff"] .staff-sidebar{background:#fff;padding:18px 12px 20px;border-right:1px solid #dce2dc;position:sticky;top:78px;max-height:calc(100dvh - 78px);overflow-y:auto;align-self:start;scrollbar-width:thin}
+.staff-profile{display:flex;align-items:center;gap:10px;padding:0 8px 17px;border-bottom:1px solid #dce2dc;margin-bottom:15px}
+.staff-avatar{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:#e7eee4;color:#284f39;font:600 13px Arial,sans-serif}
+.workspace-shell[data-workspace-mode="staff"] .staff-profile h3{font:600 13px/1.5 Arial,sans-serif;margin:0;color:#24342b}
+.workspace-shell[data-workspace-mode="staff"] .staff-profile p{font:12px/1.5 Arial,sans-serif;margin:2px 0 0;color:#657268}
+.staff-nav-label{padding:0 10px 8px;color:#806136;font:10px Arial,sans-serif;letter-spacing:1.1px}
+.workspace-shell[data-workspace-mode="staff"] .workspace-links{display:grid;gap:4px;margin:0;padding:0;position:static;background:transparent;box-shadow:none}
+.workspace-shell[data-workspace-mode="staff"] .workspace-links>a{display:flex;align-items:center;gap:10px;min-height:38px;padding:8px 10px;margin:0;border-radius:5px;color:#24342b;text-decoration:none;font:12px/1.5 Arial,sans-serif;background:transparent}
+.workspace-shell[data-workspace-mode="staff"] .workspace-links>a::before,.workspace-shell[data-workspace-mode="staff"] .workspace-links>a::after{display:none;content:none}
+.workspace-shell[data-workspace-mode="staff"] .workspace-links>a svg{width:16px;height:16px;flex:none;color:#7c887c}
+.workspace-shell[data-workspace-mode="staff"] .workspace-links>a:hover{background:#f1f4f0}
+.workspace-shell[data-workspace-mode="staff"] .workspace-links>a[aria-current="page"]{background:#e7eee4;color:#284f39;font-weight:600}
+.staff-sidebar-bottom{border-top:1px solid #dce2dc;margin-top:18px;padding-top:12px;display:grid;gap:4px}
+.staff-account-link,.staff-logout{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border:0;border-radius:5px;background:transparent;text-align:left;color:#657268;text-decoration:none;cursor:pointer;font:12px/1.5 Arial,sans-serif}
+.staff-account-link svg,.staff-logout svg{width:16px;height:16px;flex:none}
+.staff-account-link:hover,.staff-logout:hover,.staff-account-link[aria-current="page"]{background:#e7eee4;color:#284f39}
+.staff-sidebar-bottom form{margin:0;padding:0;border:0;max-width:none!important}
+.staff-sidebar-bottom .workspace-context-switch{margin-bottom:4px;font-size:12px}
+.workspace-shell[data-workspace-mode="staff"] .workspace-menu-toggle{display:none}
+@media(max-width:800px){
+ .workspace-shell[data-workspace-mode="staff"]{grid-template-columns:1fr}
+ .workspace-shell[data-workspace-mode="staff"] .staff-sidebar{position:static;max-height:none;padding:14px 16px;border-right:0;border-bottom:1px solid #dce2dc}
+ .workspace-shell[data-workspace-mode="staff"] .workspace-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+ .workspace-shell[data-workspace-mode="staff"] .staff-sidebar-bottom{margin-top:12px}
+}
+@media(max-width:480px){.workspace-shell[data-workspace-mode="staff"] .workspace-links{grid-template-columns:1fr}}
+@media print{.workspace-shell[data-workspace-mode="staff"] .staff-sidebar{display:none}}

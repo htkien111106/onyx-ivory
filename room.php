@@ -11,11 +11,13 @@ $room = query(
 if (!$room) {
     http_response_code(404);
     $title = 'Không tìm thấy phòng';
+
     require __DIR__ . '/includes/header.php';
     ?>
     <section class="section">
         <h1>Không tìm thấy phòng</h1>
         <p>Hạng phòng này hiện chưa mở bán.</p>
+
         <a class="text-link" href="<?= e(url('rooms.php')) ?>">
             Xem các hạng phòng đang mở bán ↗
         </a>
@@ -39,28 +41,40 @@ if ($amenitiesText === '') {
         . "Két an toàn\nTrà & cà phê\nBàn làm việc\nBữa sáng hằng ngày";
 }
 
-$amenities = preg_split('/\R/u', $amenitiesText, -1, PREG_SPLIT_NO_EMPTY);
+$amenities = preg_split(
+    '/\R/u',
+    $amenitiesText,
+    -1,
+    PREG_SPLIT_NO_EMPTY
+) ?: [];
 
-// Dùng ngày từ trang tìm phòng nếu khách đã chọn.
+// Giữ ngày từ trang tìm phòng nếu hợp lệ.
 $today = new DateTimeImmutable('today');
 
-$readDate = static function ($value) {
-    if (!is_string($value)) {
+$readDate = static function ($value): ?DateTimeImmutable {
+    if (
+        !is_string($value)
+        || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)
+    ) {
         return null;
     }
 
     $date = DateTimeImmutable::createFromFormat('!Y-m-d', $value);
 
-    return $date && $date->format('Y-m-d') === $value ? $date : null;
+    return $date && $date->format('Y-m-d') === $value
+        ? $date
+        : null;
 };
 
 $checkIn = $readDate(input('check_in', '')) ?? $today;
+
 if ($checkIn < $today) {
     $checkIn = $today;
 }
 
 $firstCheckOut = $checkIn->modify('+1 day');
 $checkOut = $readDate(input('check_out', '')) ?? $firstCheckOut;
+
 if ($checkOut < $firstCheckOut) {
     $checkOut = $firstCheckOut;
 }
@@ -68,9 +82,14 @@ if ($checkOut < $firstCheckOut) {
 $capacity = (int) $room['capacity'];
 $quantity = max(1, min(5, (int) input('quantity', '1')));
 $guestLimit = min(20, $capacity * $quantity);
-$guests = max(1, (int) input('guests', (string) min(2, $capacity)));
+
+$guests = max(
+    1,
+    (int) input('guests', (string) min(2, $capacity))
+);
 
 $title = $room['name'];
+
 require __DIR__ . '/includes/header.php';
 ?>
 
@@ -81,15 +100,29 @@ require __DIR__ . '/includes/header.php';
     >
 
     <div>
-        <div class="eyebrow"><?= e($room['subtitle']) ?></div>
+        <div class="eyebrow">
+            <?= e($room['subtitle'] ?? '') ?>
+        </div>
+
         <h1><?= e($room['name']) ?></h1>
+
+        <a
+            class="room-back-link"
+            href="<?= e(url('rooms.php')) ?>"
+        >
+            <span aria-hidden="true">←</span>
+            Quay lại danh sách phòng
+        </a>
     </div>
 </section>
 
 <section class="section detail-grid">
     <div>
-        <div class="eyebrow">A SPACE TO CALL YOUR OWN</div>
-        <h2>Thoải mái trong <em>từng chi tiết.</em></h2>
+        <div class="eyebrow">
+            A SPACE TO CALL YOUR OWN
+        </div>
+
+        <h2>Thoải mái trong từng chi tiết</h2>
 
         <p><?= e($room['description']) ?></p>
 
@@ -137,17 +170,26 @@ require __DIR__ . '/includes/header.php';
                             <th scope="col">Đơn giá</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <?php foreach ($services as $service): ?>
                             <?php
-                            $price = $service['price'] ?? $service['unit_price'] ?? null;
-                            $unit = trim((string) ($service['unit'] ?? ''));
+                            $price = $service['price']
+                                ?? $service['unit_price']
+                                ?? null;
+
+                            $unit = trim(
+                                (string) ($service['unit'] ?? '')
+                            );
                             ?>
+
                             <tr>
                                 <td><?= e($service['name']) ?></td>
+
                                 <td>
                                     <?php if ($price !== null): ?>
                                         <?= money($price) ?>
+
                                         <?php if ($unit !== ''): ?>
                                             / <?= e($unit) ?>
                                         <?php endif; ?>
@@ -183,7 +225,9 @@ require __DIR__ . '/includes/header.php';
 
     <aside class="panel">
         <div class="eyebrow">ĐẶT TRỰC TIẾP</div>
+
         <h2><?= money($room['price']) ?></h2>
+
         <p>/ phòng / đêm · Đã gồm thuế và bữa sáng tại nhà hàng</p>
 
         <form
@@ -192,7 +236,11 @@ require __DIR__ . '/includes/header.php';
             method="get"
             data-capacity="<?= $capacity ?>"
         >
-            <input type="hidden" name="id" value="<?= (int) $room['id'] ?>">
+            <input
+                type="hidden"
+                name="id"
+                value="<?= (int) $room['id'] ?>"
+            >
 
             <label>
                 Ngày nhận phòng
@@ -224,6 +272,7 @@ require __DIR__ . '/includes/header.php';
                         name="quantity"
                         min="1"
                         max="5"
+                        step="1"
                         value="<?= $quantity ?>"
                         required
                     >
@@ -236,6 +285,7 @@ require __DIR__ . '/includes/header.php';
                         name="guests"
                         min="1"
                         max="<?= $guestLimit ?>"
+                        step="1"
                         value="<?= $guests ?>"
                         aria-describedby="guest-limit"
                         required
@@ -244,7 +294,8 @@ require __DIR__ . '/includes/header.php';
             </div>
 
             <p id="guest-limit" aria-live="polite">
-                Với <?= $quantity ?> phòng, bạn có thể đặt tối đa <?= $guestLimit ?> khách.
+                Với <?= $quantity ?> phòng, bạn có thể đặt tối đa
+                <?= $guestLimit ?> khách.
             </p>
 
             <button type="submit" class="button full">
@@ -256,7 +307,12 @@ require __DIR__ . '/includes/header.php';
 
 <script>
 (() => {
+    "use strict";
+
     const form = document.getElementById('room-booking-form');
+
+    if (!form) return;
+
     const checkIn = form.elements.namedItem('check_in');
     const checkOut = form.elements.namedItem('check_out');
     const quantity = form.elements.namedItem('quantity');
@@ -264,31 +320,42 @@ require __DIR__ . '/includes/header.php';
     const guestHint = document.getElementById('guest-limit');
     const capacity = Number(form.dataset.capacity);
 
-    checkIn.addEventListener('change', () => {
+    function syncDates() {
         const nextDay = checkIn.valueAsDate;
+
         if (!nextDay || !checkIn.validity.valid) return;
 
         nextDay.setUTCDate(nextDay.getUTCDate() + 1);
+
         const minimum = nextDay.toISOString().slice(0, 10);
 
         checkOut.min = minimum;
 
-        // Giữ ngày trả khách đã chọn nếu vẫn sau ngày nhận mới.
         if (!checkOut.value || checkOut.value < minimum) {
             checkOut.value = minimum;
         }
-    });
+    }
 
-    quantity.addEventListener('input', () => {
+    function syncGuestLimit() {
         if (!quantity.validity.valid) return;
 
         const count = quantity.valueAsNumber;
+
+        if (!Number.isInteger(count)) return;
+
         const limit = Math.min(20, capacity * count);
 
         guests.max = String(limit);
+
         guestHint.textContent =
             `Với ${count} phòng, bạn có thể đặt tối đa ${limit} khách.`;
-    });
+    }
+
+    checkIn.addEventListener('change', syncDates);
+    quantity.addEventListener('input', syncGuestLimit);
+
+    syncDates();
+    syncGuestLimit();
 })();
 </script>
 

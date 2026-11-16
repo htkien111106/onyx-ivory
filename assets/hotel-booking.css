@@ -1,0 +1,618 @@
+/* THE ONYX & IVORY — ĐẶT PHÒNG */
+
+body.page-booking:not(.staff-page) {
+  --booking-header-height: 150px;
+  --booking-paper: #faf8f3;
+  --booking-ink: #40382f;
+  --booking-line: #ded6c7;
+  --booking-gold: #a48249;
+
+  margin: 0;
+  background: var(--booking-paper);
+  color: var(--booking-ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.page-booking:not(.staff-page) *,
+body.page-booking:not(.staff-page) *::before,
+body.page-booking:not(.staff-page) *::after {
+  box-sizing: border-box;
+  font-style: normal !important;
+}
+
+body.page-booking:not(.staff-page) h1,
+body.page-booking:not(.staff-page) h2,
+body.page-booking:not(.staff-page) h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.3;
+}
+
+body.page-booking:not(.staff-page) main [id] {
+  scroll-margin-top: calc(var(--booking-header-height) + 20px);
+}
+
+body.page-booking:not(.staff-page) a:focus-visible,
+body.page-booking:not(.staff-page) button:focus-visible {
+  outline: 2px solid var(--booking-gold);
+  outline-offset: 4px;
+}
+
+/* Thanh điều hướng */
+
+body.page-booking:not(.staff-page) .topline {
+  background: #eee7dc;
+  color: #514539;
+  border-bottom: 1px solid #ded3c2;
+}
+
+body.page-booking:not(.staff-page) .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: var(--booking-header-height);
+  padding: 0 5%;
+  overflow: visible;
+  background: #faf7f1;
+  color: var(--booking-ink);
+  border-bottom: 1px solid var(--booking-line);
+  box-shadow: 0 4px 18px #40382f0d;
+}
+
+body.page-booking:not(.staff-page) .site-header .brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 260px;
+  margin: 0;
+  padding: 0;
+  color: var(--booking-ink);
+  text-align: center;
+  text-decoration: none;
+}
+
+body.page-booking:not(.staff-page) .site-header .brand-symbol {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: #af8c51;
+  font:
+    400 50px/1 "Times New Roman",
+    serif;
+  letter-spacing: -4px;
+}
+
+body.page-booking:not(.staff-page) .site-header .brand-symbol > span {
+  font-size: 29px;
+}
+
+body.page-booking:not(.staff-page) .site-header .brand > span:last-child {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--booking-ink);
+  font:
+    400 19px/1.5 "Times New Roman",
+    serif;
+  letter-spacing: 1.5px;
+}
+
+body.page-booking:not(.staff-page) .site-header .brand small {
+  display: block;
+  margin-top: 5px;
+  color: #8a7555;
+  font:
+    8px/1.5 Arial,
+    sans-serif;
+  letter-spacing: 3px;
+}
+
+body.page-booking:not(.staff-page) .site-header #main-nav {
+  position: absolute;
+  inset: 0 5%;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr))
+    280px
+    repeat(3, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+body.page-booking:not(.staff-page) .site-header #main-nav > * {
+  grid-row: 1;
+  min-width: 0;
+  max-width: 100%;
+  pointer-events: auto;
+}
+
+body.page-booking:not(.staff-page) #main-nav > :nth-child(1) {
+  grid-column: 1;
+}
+
+body.page-booking:not(.staff-page) #main-nav > :nth-child(2) {
+  grid-column: 2;
+}
+
+body.page-booking:not(.staff-page) #main-nav > :nth-child(3) {
+  grid-column: 3;
+}
+
+body.page-booking:not(.staff-page) #main-nav > :nth-child(4) {
+  grid-column: 5;
+}
+
+body.page-booking:not(.staff-page) #main-nav > :nth-child(5) {
+  grid-column: 6;
+}
+
+body.page-booking:not(.staff-page) #main-nav > :nth-child(6) {
+  grid-column: 7;
+}
+
+body.page-booking:not(.staff-page) .site-header #main-nav > a,
+body.page-booking:not(.staff-page) .site-header .nav-logout-button {
+  color: #514539;
+  font:
+    400 13px/1.6 Arial,
+    sans-serif;
+  text-decoration: none;
+}
+
+body.page-booking:not(.staff-page) .site-header #main-nav > a:hover,
+body.page-booking:not(.staff-page) .site-header .nav-logout-button:hover {
+  color: var(--booking-gold);
+}
+
+body.page-booking:not(.staff-page) .site-header #main-nav .nav-user {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.page-booking:not(.staff-page) .site-header #main-nav .nav-logout {
+  justify-content: center;
+}
+
+body.page-booking:not(.staff-page) .site-header .menu-toggle {
+  display: none;
+}
+
+/* Tiêu đề và các bước đặt phòng */
+
+body.page-booking:not(.staff-page) .page-heading {
+  padding: 48px 6% 42px;
+  border-bottom: 1px solid var(--booking-line);
+  background: #f0ece3;
+  text-align: center;
+}
+
+body.page-booking:not(.staff-page) .page-heading .eyebrow {
+  margin-bottom: 20px;
+  color: #967443;
+  font-size: 10px;
+  line-height: 2;
+  letter-spacing: 2px;
+}
+
+body.page-booking:not(.staff-page) .page-heading h1 {
+  margin: 0 0 20px;
+  color: var(--booking-ink);
+  font-size: clamp(36px, 4vw, 54px);
+}
+
+body.page-booking:not(.staff-page) .page-heading a {
+  display: inline-block;
+  color: #806136;
+  font-size: 13px;
+}
+
+body.page-booking:not(.staff-page) .page-heading .text-link {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #b49a72;
+}
+
+/* Khung nội dung */
+
+body.page-booking:not(.staff-page) main > .section {
+  width: min(1240px, 90%);
+  max-width: none;
+  margin-inline: auto;
+  padding: 40px 0 80px;
+}
+
+body.page-booking:not(.staff-page) .detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.85fr);
+  align-items: start;
+  gap: 28px;
+}
+
+body.page-booking:not(.staff-page) .detail-grid > * {
+  min-width: 0;
+}
+
+body.page-booking:not(.staff-page) main .panel {
+  padding: 30px;
+  border: 1px solid var(--booking-line);
+  border-radius: 0;
+  background: #fffdf8;
+  box-shadow: 0 8px 28px #40382f06;
+}
+
+body.page-booking:not(.staff-page) main .panel h2 {
+  margin: 0 0 16px;
+  color: var(--booking-ink);
+  font-size: 30px;
+}
+
+body.page-booking:not(.staff-page) main .panel h3 {
+  color: var(--booking-ink);
+  font-size: 25px;
+}
+
+body.page-booking:not(.staff-page) main p {
+  color: #706b61;
+  line-height: 1.85;
+}
+
+body.page-booking:not(.staff-page) main small {
+  color: #80786b;
+  line-height: 1.8;
+}
+
+/* Các trường nhập liệu */
+
+body.page-booking:not(.staff-page) main label {
+  color: #514539;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+body.page-booking:not(.staff-page)
+  main
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.page-booking:not(.staff-page) main select,
+body.page-booking:not(.staff-page) main textarea {
+  width: 100%;
+  min-width: 0;
+  margin-top: 8px;
+  padding: 13px 14px;
+  border: 1px solid #d8cebd;
+  border-radius: 3px;
+  background: #fffefb;
+  color: var(--booking-ink);
+  font:
+    15px/1.5 Arial,
+    sans-serif;
+}
+
+body.page-booking:not(.staff-page)
+  main
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.page-booking:not(.staff-page) main select {
+  min-height: 48px;
+}
+
+body.page-booking:not(.staff-page) main textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+body.page-booking:not(.staff-page) main input:focus-visible,
+body.page-booking:not(.staff-page) main select:focus-visible,
+body.page-booking:not(.staff-page) main textarea:focus-visible {
+  outline: 2px solid #b89a65;
+  outline-offset: 2px;
+}
+
+body.page-booking:not(.staff-page) main input:disabled,
+body.page-booking:not(.staff-page) main select:disabled,
+body.page-booking:not(.staff-page) main textarea:disabled {
+  background: #eee9df;
+  color: #827a6c;
+  cursor: not-allowed;
+}
+
+body.page-booking:not(.staff-page) main input[type="checkbox"],
+body.page-booking:not(.staff-page) main input[type="radio"] {
+  accent-color: #967443;
+}
+
+body.page-booking:not(.staff-page) main .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+body.page-booking:not(.staff-page) main .checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-block: 22px;
+}
+
+body.page-booking:not(.staff-page) main .checkbox input {
+  flex: 0 0 auto;
+  margin-top: 4px;
+}
+
+body.page-booking:not(.staff-page) main .checkbox a {
+  color: #806136;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Nút */
+
+body.page-booking:not(.staff-page) main .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 14px 22px;
+  border: 1px solid #24382e;
+  border-radius: 2px;
+  background: #24382e;
+  color: #fffaf2;
+  font:
+    12px/1.6 Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+body.page-booking:not(.staff-page) main .button:not(:disabled):hover {
+  border-color: #967443;
+  background: #967443;
+  color: #fff;
+}
+
+body.page-booking:not(.staff-page) main .button.outline {
+  border-color: #b49a72;
+  background: transparent;
+  color: #806136;
+}
+
+body.page-booking:not(.staff-page) main .button.outline:not(:disabled):hover {
+  background: #967443;
+  color: #fff;
+}
+
+body.page-booking:not(.staff-page) main .button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+body.page-booking:not(.staff-page) main .button.full {
+  width: 100%;
+}
+
+/* Thông báo: giữ phân biệt lỗi và thành công */
+
+body.page-booking:not(.staff-page) main .notice {
+  padding: 18px 22px;
+  border: 1px solid #e1d6c3;
+  border-left: 3px solid #b49a72;
+  border-radius: 3px;
+  background: #f4efe5;
+  color: #68583e;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+body.page-booking:not(.staff-page) main .notice.error {
+  border-color: #ebccc4;
+  border-left-color: #ac6352;
+  background: #fbf0ec;
+  color: #873f30;
+}
+
+body.page-booking:not(.staff-page) main .notice.success {
+  border-color: #cbdccc;
+  border-left-color: #527452;
+  background: #edf4eb;
+  color: #355535;
+}
+
+body.page-booking:not(.staff-page) main .notice a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Tóm tắt đặt phòng */
+
+body.page-booking:not(.staff-page) .booking-summary {
+  position: static;
+  overflow: hidden;
+}
+
+body.page-booking:not(.staff-page) .booking-summary > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  margin: 0 0 25px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+body.page-booking:not(.staff-page) .booking-summary .eyebrow {
+  color: #967443;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+body.page-booking:not(.staff-page) .booking-summary dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-block: 25px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+body.page-booking:not(.staff-page) .booking-summary dt {
+  color: #80786b;
+}
+
+body.page-booking:not(.staff-page) .booking-summary dd {
+  min-width: 0;
+  margin: 0;
+  color: #40382f;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+body.page-booking:not(.staff-page) .booking-summary .total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 22px;
+  border-top: 1px solid var(--booking-line);
+}
+
+body.page-booking:not(.staff-page) .booking-summary .total strong {
+  color: #806136;
+  font:
+    400 30px/1.3 "Times New Roman",
+    serif;
+}
+
+/* Responsive */
+
+@media (max-width: 1250px) {
+  body.page-booking:not(.staff-page) {
+    --booking-header-height: 118px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .brand {
+    width: 230px;
+    gap: 5px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .brand-symbol {
+    font-size: 44px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .brand > span:last-child {
+    font-size: 16px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .menu-toggle {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: block;
+    padding: 7px 12px;
+    border: 1px solid #cdbb9d;
+    background: transparent;
+    color: #514539;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  body.page-booking:not(.staff-page) .site-header #main-nav {
+    inset: 100% 0 auto;
+    display: none;
+    max-height: calc(100dvh - var(--booking-header-height));
+    padding: 24px 6%;
+    overflow-y: auto;
+    background: #faf7f1;
+    border-bottom: 1px solid var(--booking-line);
+    box-shadow: 0 14px 24px #4b382114;
+    pointer-events: auto;
+  }
+
+  body.page-booking:not(.staff-page) .site-header #main-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header #main-nav .nav-logout {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  body.page-booking:not(.staff-page) .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  body.page-booking:not(.staff-page) .page-heading {
+    padding: 35px 5%;
+  }
+
+  body.page-booking:not(.staff-page) .page-heading .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  body.page-booking:not(.staff-page) main > .section {
+    width: 92%;
+    padding-top: 25px;
+  }
+
+  body.page-booking:not(.staff-page) main .panel {
+    padding: 22px;
+  }
+
+  body.page-booking:not(.staff-page) main .form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .brand {
+    width: 210px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .brand > span:last-child {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  body.page-booking:not(.staff-page) .site-header .brand small {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  body.page-booking:not(.staff-page) .booking-summary .total strong {
+    font-size: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-booking:not(.staff-page) main .button {
+    transition: none;
+  }
+}

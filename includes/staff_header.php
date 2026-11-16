@@ -64,24 +64,29 @@ require __DIR__ . '/header.php';
         </div>
     </aside>
 <?php else: ?>
-    <aside class="workspace-nav">
-        <div class="eyebrow"><?= $workspaceMode === 'admin' ? 'QUẢN TRỊ KHÁCH SẠN' : 'NGHIỆP VỤ STAFF' ?></div>
-        <h3><?= e($user['display_name']) ?></h3>
-        <p><?= $user['role'] === 'admin' ? 'Quản trị viên' : 'Staff / Lễ tân' ?></p>
-        <?php if ($user['role'] === 'admin'): ?>
-            <a class="workspace-context-switch" href="<?= e(url($workspaceMode === 'admin' ? 'reception/index.php' : 'admin/index.php')) ?>">
-                <span><?= $workspaceMode === 'admin' ? 'Chuyển sang Staff' : 'Về trang Admin' ?></span><?= catalog_icon('arrow') ?>
-            </a>
-        <?php endif; ?>
-        <button type="button" class="workspace-menu-toggle" aria-expanded="false" aria-controls="workspace-menu">Menu quản lý <span aria-hidden="true">☰</span></button>
+    <aside class="workspace-nav staff-sidebar">
+        <div class="staff-profile">
+            <span class="staff-avatar" aria-hidden="true"><?= e(mb_strtoupper(mb_substr(trim($user['display_name']), 0, 1))) ?></span>
+            <div><h3><?= e($user['display_name']) ?></h3><p><?= $user['role'] === 'admin' ? 'Quản trị viên / Lễ tân' : 'Staff / Lễ tân' ?></p></div>
+        </div>
+        <div class="staff-nav-label">NGHIỆP VỤ LỄ TÂN</div>
+        <button type="button" class="workspace-menu-toggle" aria-expanded="false" aria-controls="workspace-menu">Danh mục <?= catalog_icon('menu') ?></button>
         <nav class="workspace-links" id="workspace-menu" aria-label="Điều hướng nghiệp vụ">
-            <?php foreach ($workspaceItems as [$workspacePath,$workspaceLabel]): ?>
-                <a href="<?= e(url($workspacePath)) ?>"><?= e($workspaceLabel) ?></a>
+            <?php
+            $staffIcons = ['report','audit','reviews','plus','rooms','types','members'];
+            foreach ($workspaceItems as $staffIndex => [$workspacePath,$workspaceLabel]):
+                $staffActive = str_ends_with($workspaceScript, '/' . $workspacePath);
+            ?>
+                <a href="<?= e(url($workspacePath)) ?>" <?= $staffActive ? 'aria-current="page"' : '' ?>><?= catalog_icon($staffIcons[$staffIndex] ?? 'report') ?><span><?= e($workspaceLabel) ?></span></a>
             <?php endforeach; ?>
-            <div class="nav-divider"></div>
-            <a href="<?= e(url('staff/account.php'.($workspaceMode === 'staff' && $user['role'] === 'admin' ? '?workspace=staff' : ''))) ?>">Tài khoản của tôi</a>
         </nav>
-        <form method="post" action="<?= e(url('staff/logout.php')) ?>"><?= csrf() ?><button type="submit" class="button outline full">ĐĂNG XUẤT</button></form>
+        <div class="staff-sidebar-bottom">
+            <?php if ($user['role'] === 'admin'): ?>
+                <a class="workspace-context-switch" href="<?= e(url('admin/index.php')) ?>"><span>Về trang Admin</span><?= catalog_icon('arrow') ?></a>
+            <?php endif; ?>
+            <a class="staff-account-link" href="<?= e(url('staff/account.php'.($user['role'] === 'admin' ? '?workspace=staff' : ''))) ?>" <?= str_ends_with($workspaceScript, '/staff/account.php') ? 'aria-current="page"' : '' ?>><?= catalog_icon('account') ?><span>Tài khoản của tôi</span></a>
+            <form method="post" action="<?= e(url('staff/logout.php')) ?>"><?= csrf() ?><button type="submit" class="staff-logout"><?= catalog_icon('logout') ?><span>Đăng xuất</span></button></form>
+        </div>
     </aside>
 <?php endif; ?>
     <div class="workspace-content">

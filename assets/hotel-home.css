@@ -1,0 +1,1189 @@
+/* THE ONYX & IVORY — TRANG CHỦ */
+
+body.page-index:not(.staff-page) {
+  --home-header-height: 150px;
+  margin: 0;
+  background: #faf8f3;
+  color: #242723;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.page-index:not(.staff-page) *,
+body.page-index:not(.staff-page) *::before,
+body.page-index:not(.staff-page) *::after {
+  box-sizing: border-box;
+  font-style: normal !important;
+}
+
+body.page-index:not(.staff-page) .topline {
+  display: none;
+}
+
+/* Header */
+
+body.page-index:not(.staff-page) .site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: var(--home-header-height);
+  padding: 0 5%;
+  overflow: visible;
+  background: transparent;
+  color: #fffaf2;
+  border: 0;
+  border-bottom: 1px solid #ffffff33;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+body.page-index:not(.staff-page) .site-header.is-scrolled {
+  background: #191816;
+  border-bottom-color: #c6a36359;
+  box-shadow: 0 5px 20px #0003;
+}
+
+body.page-index:not(.staff-page) .site-header .brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 260px;
+  margin: 0;
+  padding: 0;
+  color: #fffaf2;
+  text-align: center;
+  text-decoration: none;
+}
+
+body.page-index:not(.staff-page) .site-header .brand-symbol {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: #d5b477;
+  font:
+    400 52px/1 "Times New Roman",
+    serif;
+  letter-spacing: -4px;
+}
+
+body.page-index:not(.staff-page) .site-header .brand-symbol span {
+  font-size: 29px;
+}
+
+body.page-index:not(.staff-page) .site-header .brand > span:last-child {
+  padding: 0;
+  border: 0;
+  color: #fffaf2;
+  font:
+    400 19px/1.5 "Times New Roman",
+    serif;
+  letter-spacing: 1.5px;
+}
+
+body.page-index:not(.staff-page) .site-header .brand small {
+  display: block;
+  margin-top: 5px;
+  color: #eee3cf;
+  font:
+    8px/1.5 Arial,
+    sans-serif;
+  letter-spacing: 3px;
+}
+
+body.page-index:not(.staff-page) .site-header #main-nav {
+  position: absolute;
+  inset: 0 5%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 280px repeat(
+      3,
+      minmax(0, 1fr)
+    );
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+body.page-index:not(.staff-page) .site-header #main-nav > * {
+  grid-row: 1;
+  min-width: 0;
+  max-width: 100%;
+  pointer-events: auto;
+}
+
+body.page-index:not(.staff-page) #main-nav > :nth-child(1) {
+  grid-column: 1;
+}
+body.page-index:not(.staff-page) #main-nav > :nth-child(2) {
+  grid-column: 2;
+}
+body.page-index:not(.staff-page) #main-nav > :nth-child(3) {
+  grid-column: 3;
+}
+body.page-index:not(.staff-page) #main-nav > :nth-child(4) {
+  grid-column: 5;
+}
+body.page-index:not(.staff-page) #main-nav > :nth-child(5) {
+  grid-column: 6;
+}
+body.page-index:not(.staff-page) #main-nav > :nth-child(6) {
+  grid-column: 7;
+}
+
+body.page-index:not(.staff-page) .site-header #main-nav > a,
+body.page-index:not(.staff-page) .site-header .nav-logout-button {
+  color: #fffaf2;
+  font:
+    400 13px/1.6 Arial,
+    sans-serif;
+  text-decoration: none;
+}
+
+body.page-index:not(.staff-page) .site-header #main-nav > a:hover,
+body.page-index:not(.staff-page) .site-header .nav-logout-button:hover {
+  color: #d5b477;
+}
+
+body.page-index:not(.staff-page) .site-header .nav-user {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.page-index:not(.staff-page) .site-header #main-nav .nav-logout {
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.page-index:not(.staff-page) .site-header .menu-toggle,
+body.page-index:not(.staff-page) .site-header #main-nav > a.button {
+  display: none;
+}
+
+body.page-index:not(.staff-page) a:focus-visible,
+body.page-index:not(.staff-page) button:focus-visible {
+  outline: 2px solid #bb955e;
+  outline-offset: 5px;
+}
+
+body.page-index:not(.staff-page) main [id] {
+  scroll-margin-top: calc(var(--home-header-height) + 20px);
+}
+
+body.page-index:not(.staff-page) #flash-message {
+  position: fixed;
+  top: calc(var(--home-header-height) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1010;
+  width: min(560px, calc(100% - 32px));
+  margin: 0;
+  box-shadow: 0 12px 35px #0003;
+}
+
+/* Thành phần chung */
+
+.hotel-home {
+  --hh-ink: #242723;
+  --hh-green: #24382e;
+  --hh-gold: #967443;
+  --hh-line: #ded6c7;
+  color: var(--hh-ink);
+}
+
+.hotel-home h1,
+.hotel-home h2,
+.hotel-home h3,
+.hh-signature,
+.hh-room-price strong,
+.hh-offer-rate {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.hotel-home p {
+  color: #696b63;
+  line-height: 1.85;
+}
+
+.hotel-home a {
+  text-decoration: none;
+}
+.hotel-home img {
+  display: block;
+  max-width: 100%;
+}
+
+.hh-container {
+  width: min(1240px, 88%);
+  margin-inline: auto;
+}
+
+.hh-section {
+  padding-block: 90px;
+}
+
+.hh-kicker {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--hh-gold);
+  font:
+    11px/1.7 Arial,
+    sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hh-title {
+  margin: 0 0 24px;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.3;
+}
+
+.hh-heading {
+  max-width: 720px;
+  margin: 0 auto 44px;
+  text-align: center;
+}
+
+.hh-heading p {
+  margin-bottom: 0;
+}
+
+.hh-heading::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 1px;
+  margin: 28px auto 0;
+  background: var(--hh-gold);
+}
+
+.hh-link {
+  display: inline-block;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--hh-gold);
+  color: var(--hh-ink);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.hh-link:hover {
+  color: var(--hh-gold);
+}
+
+.hh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 15px 27px;
+  border: 1px solid var(--hh-green);
+  border-radius: 0;
+  background: var(--hh-green);
+  color: #fff;
+  font:
+    11px/1.5 Arial,
+    sans-serif;
+  letter-spacing: 1.7px;
+  text-align: center;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.hh-button:hover {
+  background: #3a5142;
+  color: #fff;
+}
+.hh-center {
+  margin-top: 36px;
+  text-align: center;
+}
+
+/* Banner */
+
+.hotel-home .hh-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  height: 100svh;
+  min-height: 700px;
+  max-height: none;
+  margin: 0;
+  overflow: hidden;
+  background: #25312a;
+  text-align: center;
+}
+
+.hh-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hh-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    #0a0f0cad 0%,
+    #0a0f0c5c 35%,
+    #0a0f0c66 65%,
+    #0a0f0c99 100%
+  );
+}
+
+.hh-hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 88%);
+  padding: 180px 0 90px;
+}
+
+.hh-hero .hh-kicker {
+  color: #ebcd93;
+  font-size: 12px;
+  letter-spacing: 4px;
+}
+
+.hh-hero h1 {
+  margin: 0 0 25px;
+  color: #fffaf2;
+  font-size: clamp(44px, 5.5vw, 78px);
+  line-height: 1.25;
+  text-shadow: 0 3px 22px #0005;
+}
+
+.hh-hero p {
+  max-width: 620px;
+  margin: 0 auto 32px;
+  color: #f5efdf;
+  font-size: 17px;
+}
+
+.hh-hero .hh-button-light {
+  min-width: 190px;
+  min-height: 54px;
+  padding: 16px 32px;
+  border-color: #f2dfb6;
+  background: #ac873f;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 2px;
+  box-shadow: 0 8px 24px #0003;
+}
+
+.hh-hero .hh-button-light:hover {
+  background: #c29c52;
+}
+
+.hh-hero-foot {
+  position: absolute;
+  z-index: 1;
+  bottom: 30px;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #f1e6d0;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.hh-hero-foot a {
+  color: inherit;
+}
+
+.hh-title-line {
+  display: block;
+  overflow: hidden;
+  padding: 0.16em 0.08em;
+}
+
+.hh-title-line + .hh-title-line {
+  margin-top: -0.12em;
+}
+.hh-enter-down,
+.hh-enter-up {
+  display: block;
+}
+
+/* Bộ lọc */
+
+.hh-search {
+  position: relative;
+  z-index: 2;
+  background: #fffdf8;
+  border-bottom: 1px solid var(--hh-line);
+}
+
+.hotel-home .hh-search .search-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr 0.8fr 1.2fr;
+  align-items: end;
+  gap: 24px;
+  margin: 0;
+  padding: 28px 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hotel-home .hh-search label {
+  min-width: 0;
+  color: #736346;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+}
+
+.hotel-home .hh-search input,
+.hotel-home .hh-search select {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  border-bottom: 1px solid var(--hh-line);
+  border-radius: 0;
+  background: transparent;
+  color: #242723;
+}
+
+.hotel-home .hh-search .button {
+  border-color: var(--hh-green);
+  border-radius: 0;
+  background: var(--hh-green);
+  color: #fff;
+}
+
+/* Giới thiệu */
+
+.hh-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 8%;
+}
+
+.hh-intro-photo {
+  position: relative;
+  padding: 0 20px 20px 0;
+}
+
+.hh-intro-photo::after {
+  content: "";
+  position: absolute;
+  inset: 22px 0 0 22px;
+  border: 1px solid #baa078;
+}
+
+.hh-intro-photo img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.hh-intro-copy p {
+  margin-bottom: 20px;
+}
+
+.hh-signature {
+  display: block;
+  margin-top: 28px;
+  color: var(--hh-gold);
+  font-size: 24px;
+}
+
+/* Phòng và carousel */
+
+.hh-room-section {
+  background: #f0ece3;
+}
+
+.hotel-home .hh-room-showcase {
+  background: linear-gradient(#faf8f3 48%, #1d2822 48%);
+}
+
+.hh-rooms-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.hh-rooms-heading .hh-title {
+  margin-bottom: 0;
+  font-size: clamp(30px, 3.5vw, 46px);
+}
+
+.hh-rooms-heading .hh-kicker {
+  margin-bottom: 10px;
+}
+
+.hh-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 1px solid #967443;
+  color: #55452e;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.hh-view-all:hover {
+  background: #967443;
+  color: #fff;
+}
+
+.hh-room-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+
+.hh-room {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid #e2dbcf;
+  background: #fffdf8;
+}
+
+.hh-room-photo {
+  display: block;
+  overflow: hidden;
+}
+
+.hh-room-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.hh-room-photo:hover img {
+  transform: scale(1.04);
+}
+
+.hh-room-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 26px;
+}
+
+.hh-room h3 {
+  margin: 0 0 18px;
+  color: #967443;
+  font-size: 27px;
+}
+
+.hh-room h3 a {
+  color: inherit;
+}
+
+.hh-room-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 14px;
+  color: #706b5e;
+  font-size: 12px;
+}
+
+.hh-room-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.hh-room-price {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--hh-line);
+}
+
+.hh-room-price strong {
+  color: var(--hh-green);
+  font-size: 27px;
+}
+.hh-room-price small {
+  display: block;
+  margin-top: 4px;
+  color: #777267;
+}
+
+.hh-room-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.hh-room-actions .hh-button {
+  min-height: 44px;
+  padding: 12px 17px;
+  font-size: 10px;
+}
+
+.hh-room-carousel {
+  position: relative;
+}
+
+.hh-room-carousel .hh-room {
+  border: 0;
+  box-shadow: 0 12px 30px #00000012;
+}
+
+.hh-room-carousel .hh-room-photo img {
+  aspect-ratio: 16 / 10;
+}
+.hh-room-carousel .hh-room h3 {
+  min-height: 2.4em;
+}
+.hh-room-carousel .hh-room-description {
+  min-height: 5.55em;
+}
+
+.hotel-home .hh-carousel-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.hotel-home .hh-carousel-controls[hidden],
+.hotel-home .hh-room[hidden] {
+  display: none !important;
+}
+
+.hh-carousel-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hh-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #b49a72;
+  border-radius: 50%;
+  background: #faf8f3;
+  color: #806136;
+  font-size: 25px;
+  box-shadow: 0 4px 15px #00000012;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.hh-carousel-arrow:hover {
+  background: #967443;
+  color: #fff;
+}
+.hh-carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.hotel-home [data-room-prev] {
+  left: -54px;
+}
+.hotel-home [data-room-next] {
+  right: -54px;
+}
+
+/* Trải nghiệm và dịch vụ */
+
+.hh-experience {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: stretch;
+  margin-bottom: 32px;
+  background: #f0ece3;
+}
+
+.hh-experience.reverse {
+  grid-template-columns: 1fr 1.15fr;
+}
+.hh-experience.reverse > img {
+  order: 2;
+}
+
+.hh-experience > img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+}
+
+.hh-experience-copy {
+  align-self: center;
+  padding: clamp(28px, 5vw, 65px);
+}
+
+.hh-experience h3 {
+  font-size: clamp(30px, 3vw, 42px);
+}
+
+.hh-experience small {
+  display: block;
+  margin-bottom: 24px;
+  color: #776e5d;
+  line-height: 1.8;
+}
+
+.hh-service-list {
+  margin: 32px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--hh-line);
+  list-style: none;
+}
+
+.hh-service-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hh-line);
+}
+
+.hh-service-list strong {
+  color: var(--hh-green);
+  white-space: nowrap;
+}
+.hh-service-list small {
+  font-weight: 400;
+}
+
+/* Ưu đãi và đánh giá */
+
+.hh-offers {
+  background: var(--hh-green);
+}
+.hh-offers .hh-title,
+.hh-offers h3 {
+  color: #fff8ea;
+}
+.hh-offers .hh-kicker {
+  color: #d8ba88;
+}
+.hh-offers p {
+  color: #deded1;
+}
+
+.hh-offer-grid,
+.hh-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.hh-offer {
+  min-width: 0;
+  padding: 32px;
+  border: 1px solid #ffffff36;
+}
+.hh-offer h3 {
+  font-size: 26px;
+}
+
+.hh-offer-rate {
+  display: block;
+  margin-bottom: 20px;
+  color: #e7c68b;
+  font-size: 48px;
+}
+
+.hh-offer code {
+  display: inline-block;
+  max-width: 100%;
+  padding: 7px 12px;
+  border: 1px dashed #dcc092;
+  color: #f6ddb3;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.hh-offer .hh-link {
+  border-color: #dcc092;
+  color: #fff8ea;
+}
+
+.hh-review {
+  min-width: 0;
+  margin: 0;
+  padding: 30px;
+  border: 1px solid var(--hh-line);
+  background: #fffdf8;
+}
+
+.hh-stars {
+  margin-bottom: 18px;
+  color: #94703e;
+  font-size: 19px;
+  letter-spacing: 3px;
+}
+
+.hh-review blockquote {
+  margin: 0 0 24px;
+  color: #55594f;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.hh-review figcaption {
+  padding-top: 18px;
+  border-top: 1px solid var(--hh-line);
+  color: #807156;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Kết trang */
+
+.hh-closing {
+  padding: 90px 24px;
+  background: #eae3d5;
+  text-align: center;
+}
+
+.hh-closing .hh-title {
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+body.page-index:not(.staff-page) > footer {
+  background: #1d2822;
+  color: #f2eadb;
+}
+
+body.page-index:not(.staff-page) > footer h2,
+body.page-index:not(.staff-page) > footer h3 {
+  color: #f2eadb;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body.page-index:not(.staff-page) > footer a {
+  color: #f2eadb;
+}
+
+body.page-index:not(.staff-page) > footer p,
+body.page-index:not(.staff-page) > footer .footer-bottom {
+  color: #cbcbbc;
+  border-color: #ffffff25;
+}
+
+/* Responsive */
+
+@media (max-width: 1250px) {
+  body.page-index:not(.staff-page) {
+    --home-header-height: 118px;
+  }
+
+  body.page-index:not(.staff-page) .site-header .brand {
+    width: 230px;
+    gap: 5px;
+  }
+
+  body.page-index:not(.staff-page) .site-header .brand-symbol {
+    font-size: 44px;
+  }
+
+  body.page-index:not(.staff-page) .site-header .brand > span:last-child {
+    font-size: 16px;
+  }
+
+  body.page-index:not(.staff-page) .site-header .menu-toggle {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: block;
+    padding: 7px 12px;
+    border: 1px solid #d5b47799;
+    background: transparent;
+    color: #fffaf2;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  body.page-index:not(.staff-page) .site-header #main-nav {
+    inset: 100% 0 auto;
+    display: none;
+    max-height: calc(100dvh - var(--home-header-height));
+    padding: 24px 6%;
+    overflow-y: auto;
+    background: #191816;
+    border-bottom: 1px solid #b99a60;
+    box-shadow: 0 18px 28px #0003;
+    pointer-events: auto;
+  }
+
+  body.page-index:not(.staff-page) .site-header #main-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  body.page-index:not(.staff-page) .site-header #main-nav .nav-logout {
+    justify-content: flex-start;
+  }
+
+  .hotel-home .hh-hero {
+    min-height: 620px;
+  }
+  .hh-hero-content {
+    padding: 150px 0 85px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .hh-room-grid,
+  .hh-offer-grid,
+  .hh-review-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hotel-home .hh-search .search-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hotel-home .hh-search .button {
+    grid-column: 1 / -1;
+  }
+  .hh-room-carousel {
+    padding-inline: 26px;
+  }
+  .hotel-home [data-room-prev] {
+    left: -16px;
+  }
+  .hotel-home [data-room-next] {
+    right: -16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hh-container {
+    width: 90%;
+  }
+  .hh-section {
+    padding-block: 58px;
+  }
+  .hh-hero h1 {
+    font-size: clamp(36px, 9vw, 52px);
+  }
+  .hh-hero p {
+    font-size: 14px;
+  }
+  .hh-hero .hh-kicker {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  .hh-hero-foot {
+    justify-content: center;
+  }
+  .hh-hero-foot > span {
+    display: none;
+  }
+
+  .hh-intro,
+  .hh-room-grid,
+  .hh-offer-grid,
+  .hh-review-grid,
+  .hh-experience,
+  .hh-experience.reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .hh-intro {
+    gap: 38px;
+  }
+  .hh-intro-photo img {
+    aspect-ratio: 5 / 4;
+  }
+  .hh-experience.reverse > img {
+    order: 0;
+  }
+  .hh-experience > img {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+  .hh-service-list li {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hh-service-list strong {
+    white-space: normal;
+  }
+  .hh-closing {
+    padding-block: 60px;
+  }
+
+  .hh-rooms-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .hh-room-carousel {
+    padding-inline: 24px;
+  }
+  .hh-room-body {
+    padding: 24px;
+  }
+  .hh-room-carousel .hh-room h3,
+  .hh-room-carousel .hh-room-description {
+    min-height: 0;
+  }
+  .hh-carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+  .hotel-home [data-room-prev] {
+    left: -12px;
+  }
+  .hotel-home [data-room-next] {
+    right: -12px;
+  }
+}
+
+@media (max-width: 480px) {
+  body.page-index:not(.staff-page) .site-header .brand {
+    width: 210px;
+  }
+  body.page-index:not(.staff-page) .site-header .brand > span:last-child {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  body.page-index:not(.staff-page) .site-header .brand small {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hotel-home .hh-search .search-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hiệu ứng chữ banner */
+
+@keyframes hh-enter-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hh-enter-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hh-soft-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hh-enter-down {
+    animation: hh-enter-from-top 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+  .hh-enter-up {
+    animation: hh-enter-from-bottom 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.35s
+      both;
+  }
+  .hh-hero-content > .hh-kicker {
+    animation: hh-soft-rise 0.9s ease-out both;
+  }
+  .hh-hero-content > p {
+    animation: hh-soft-rise 1s ease-out 0.65s both;
+  }
+  .hh-hero-content > .hh-button {
+    animation: hh-soft-rise 1s ease-out 0.85s both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-index:not(.staff-page) *,
+  body.page-index:not(.staff-page) *::before,
+  body.page-index:not(.staff-page) *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,16 @@
+ assets/app.js                   |  129 [32m+++++[m
+ assets/hotel-booking.css        |  618 [32m++++++++++++++++++++[m
+ assets/hotel-customer-pages.css |  819 [32m+++++++++++++++++++++++++++[m
+ assets/hotel-home.css           | 1189 [32m+++++++++++++++++++++++++++++++++++++++[m
+ assets/hotel-home.js            |  350 [32m++++++++++++[m
+ assets/hotel-room-detail.css    |  616 [32m++++++++++++++++++++[m
+ assets/hotel-room-detail.js     |   50 [32m++[m
+ assets/hotel-rooms.css          |  718 [32m+++++++++++++++++++++++[m
+ booking.php                     |    2 [32m+[m[31m-[m
+ includes/footer.php             |    2 [32m+[m[31m-[m
+ includes/header.php             |  281 [32m+++++++[m[31m--[m
+ includes/search.php             |   12 [32m+[m[31m-[m
+ index.php                       |  792 [32m+++++++++++++++++++[m[31m-------[m
+ room.php                        |  103 [32m+++[m[31m-[m
+ rooms.php                       |  214 [32m+++++[m[31m--[m
+ 15 files changed, 5583 insertions(+), 312 deletions(-)

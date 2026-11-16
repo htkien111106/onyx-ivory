@@ -1,0 +1,1087 @@
+/* THE ONYX & IVORY — PHÒNG & SUITE */
+
+body.page-rooms:not(.staff-page) {
+  --rooms-header-height: 154px;
+  --rooms-paper: #faf8f3;
+  --rooms-line: #ded6c7;
+  --rooms-green: #24382e;
+  --rooms-gold: #967443;
+  background: var(--rooms-paper);
+  color: #242723;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.page-rooms:not(.staff-page) *,
+body.page-rooms:not(.staff-page) *::before,
+body.page-rooms:not(.staff-page) *::after {
+  box-sizing: border-box;
+  font-style: normal !important;
+}
+
+body.page-rooms:not(.staff-page) h1,
+body.page-rooms:not(.staff-page) h2,
+body.page-rooms:not(.staff-page) h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+
+body.page-rooms:not(.staff-page) a:focus-visible,
+body.page-rooms:not(.staff-page) button:focus-visible {
+  outline: 2px solid #a17e46;
+  outline-offset: 4px;
+}
+
+body.page-rooms:not(.staff-page) main [id] {
+  scroll-margin-top: calc(var(--rooms-header-height) + 20px);
+}
+
+/* Header */
+
+body.page-rooms:not(.staff-page) .topline {
+  position: relative;
+  background: #eee7dc;
+  color: #514539;
+  border-bottom: 1px solid #ded3c2;
+}
+
+body.page-rooms:not(.staff-page) .site-header {
+  position: sticky;
+  top: 0;
+  left: auto;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: var(--rooms-header-height);
+  padding: 0 5%;
+  overflow: visible;
+  background: #faf7f1;
+  color: #40382f;
+  border-bottom: 1px solid #dfd4c3;
+  box-shadow: 0 4px 18px #40382f14;
+}
+
+body.page-rooms:not(.staff-page) .site-header .brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 260px;
+  margin: 0;
+  padding: 0;
+  color: #40382f;
+  text-align: center;
+  text-decoration: none;
+}
+
+body.page-rooms:not(.staff-page) .site-header .brand-symbol {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: #af8c51;
+  font:
+    400 50px/1 "Times New Roman",
+    serif;
+  letter-spacing: -4px;
+}
+
+body.page-rooms:not(.staff-page) .site-header .brand-symbol > span {
+  color: inherit;
+  font-size: 30px;
+}
+
+body.page-rooms:not(.staff-page) .site-header .brand > span:last-child {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: #40382f;
+  font:
+    400 19px/1.5 "Times New Roman",
+    serif;
+  letter-spacing: 1.5px;
+}
+
+body.page-rooms:not(.staff-page) .site-header .brand small {
+  display: block;
+  margin-top: 5px;
+  color: #8a7555;
+  font:
+    9px/1.5 Arial,
+    sans-serif;
+  letter-spacing: 3.5px;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav {
+  position: absolute;
+  inset: 0 5%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 300px repeat(
+      3,
+      minmax(0, 1fr)
+    );
+  align-items: center;
+  justify-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav > * {
+  grid-row: 1;
+  min-width: 0;
+  max-width: 100%;
+  pointer-events: auto;
+}
+
+body.page-rooms:not(.staff-page) #main-nav > :nth-child(1) {
+  grid-column: 1;
+}
+body.page-rooms:not(.staff-page) #main-nav > :nth-child(2) {
+  grid-column: 2;
+}
+body.page-rooms:not(.staff-page) #main-nav > :nth-child(3) {
+  grid-column: 3;
+}
+body.page-rooms:not(.staff-page) #main-nav > :nth-child(4) {
+  grid-column: 5;
+}
+body.page-rooms:not(.staff-page) #main-nav > :nth-child(5) {
+  grid-column: 6;
+}
+body.page-rooms:not(.staff-page) #main-nav > :nth-child(6) {
+  grid-column: 7;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav > a,
+body.page-rooms:not(.staff-page) .site-header .nav-logout-button {
+  color: #514539;
+  font:
+    400 14px/1.6 Arial,
+    sans-serif;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav > a:hover,
+body.page-rooms:not(.staff-page) .site-header .nav-logout-button:hover {
+  color: #a47d40;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav .nav-user {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav .nav-logout {
+  justify-content: center;
+}
+
+body.page-rooms:not(.staff-page) .site-header .menu-toggle {
+  display: none;
+}
+
+/* Tiêu đề */
+
+body.page-rooms:not(.staff-page) .page-heading {
+  padding: 65px 6% 55px;
+  background: #f0ece3;
+  border-bottom: 1px solid var(--rooms-line);
+  text-align: center;
+}
+
+body.page-rooms:not(.staff-page) .page-heading .eyebrow {
+  margin-bottom: 16px;
+  color: var(--rooms-gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+body.page-rooms:not(.staff-page) .page-heading h1 {
+  margin: 0 0 18px;
+  color: var(--rooms-green);
+  font-size: clamp(38px, 4.5vw, 60px);
+}
+
+body.page-rooms:not(.staff-page) .page-heading p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #727367;
+  font-size: 14px;
+}
+
+body.page-rooms:not(.staff-page) .page-heading::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 1px;
+  margin: 25px auto 0;
+  background: #aa8b59;
+}
+
+body.page-rooms:not(.staff-page) .section.compact {
+  width: min(1320px, 90%);
+  max-width: none;
+  margin-inline: auto;
+  padding: 36px 0 80px;
+}
+
+/* Bộ lọc */
+
+body.page-rooms:not(.staff-page) .search-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr 0.8fr minmax(180px, 1fr);
+  align-items: end;
+  gap: 22px;
+  margin: 0 0 28px;
+  padding: 28px;
+  border: 1px solid var(--rooms-line);
+  background: #fffdf8;
+  box-shadow: 0 8px 28px #292c2306;
+}
+
+body.page-rooms:not(.staff-page) .search-bar label {
+  min-width: 0;
+  margin: 0;
+  color: #806b48;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+}
+
+body.page-rooms:not(.staff-page) .search-bar input,
+body.page-rooms:not(.staff-page) .search-bar select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  margin: 8px 0 0;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid #d5ccbc;
+  border-radius: 0;
+  background: transparent;
+  color: #252c25;
+  font:
+    14px Arial,
+    sans-serif;
+  letter-spacing: normal;
+}
+
+body.page-rooms:not(.staff-page) .search-bar input:focus,
+body.page-rooms:not(.staff-page) .search-bar select:focus {
+  outline: 2px solid #bba275;
+  outline-offset: 3px;
+}
+
+body.page-rooms:not(.staff-page) main .button {
+  min-height: 48px;
+  padding: 14px 20px;
+  border: 1px solid var(--rooms-green);
+  border-radius: 0;
+  background: var(--rooms-green);
+  color: #fffaf0;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+body.page-rooms:not(.staff-page) main .button:hover {
+  border-color: var(--rooms-gold);
+  background: var(--rooms-gold);
+  color: #fff;
+}
+
+body.page-rooms:not(.staff-page) .search-bar .button {
+  width: 100%;
+  margin: 0;
+}
+
+body.page-rooms:not(.staff-page) .result-count {
+  margin: 0 0 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rooms-line);
+  color: #747264;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* Danh sách phòng */
+
+body.page-rooms:not(.staff-page) .room-list {
+  display: grid;
+  gap: 30px;
+}
+
+body.page-rooms:not(.staff-page) .room-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr) minmax(
+      220px,
+      0.7fr
+    );
+  align-items: stretch;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--rooms-line);
+  background: #fffdf8;
+  box-shadow: 0 8px 25px #292c2305;
+}
+
+body.page-rooms:not(.staff-page) .room-row > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+}
+
+body.page-rooms:not(.staff-page) .room-info {
+  min-width: 0;
+  padding: 32px;
+}
+
+body.page-rooms:not(.staff-page) .room-info .eyebrow {
+  margin-bottom: 14px;
+  color: var(--rooms-gold);
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: 2px;
+}
+
+body.page-rooms:not(.staff-page) .room-info h2 {
+  margin: 0 0 18px;
+  color: #806136;
+  font-size: clamp(27px, 2.4vw, 35px);
+}
+
+body.page-rooms:not(.staff-page) .room-info p {
+  margin-bottom: 18px;
+  color: #6e7267;
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+body.page-rooms:not(.staff-page) .room-info .text-link {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #a17e46;
+  color: #55452e;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+body.page-rooms:not(.staff-page) .room-info .text-link:hover {
+  color: #a17e46;
+}
+
+body.page-rooms:not(.staff-page) .room-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 32px 26px;
+  border: 0;
+  border-left: 1px solid var(--rooms-line);
+  background: #f7f3eb;
+}
+
+body.page-rooms:not(.staff-page) .room-price .badge {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 22px;
+  padding: 7px 11px;
+  border: 1px solid #d6e0d3;
+  border-radius: 0;
+  background: #e8eee5;
+  color: #36533e;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+body.page-rooms:not(.staff-page) .room-price .badge.muted {
+  border-color: #ddd4c4;
+  background: #eae5dc;
+  color: #756b5c;
+}
+
+body.page-rooms:not(.staff-page) .room-price h3 {
+  margin: 0 0 5px;
+  color: var(--rooms-green);
+  font-size: 29px;
+  overflow-wrap: anywhere;
+}
+
+body.page-rooms:not(.staff-page) .room-price > small {
+  color: #777364;
+  font-size: 11px;
+}
+
+body.page-rooms:not(.staff-page) .room-price > p {
+  width: 100%;
+  margin: 22px 0;
+  padding-top: 18px;
+  border-top: 1px solid #ddd4c4;
+  color: #777364;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+body.page-rooms:not(.staff-page) .room-price p strong {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--rooms-green);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+body.page-rooms:not(.staff-page) .room-price .button {
+  width: 100%;
+  margin-top: auto;
+}
+
+body.page-rooms:not(.staff-page) .notice {
+  padding: 18px 22px;
+  border-radius: 0;
+  line-height: 1.8;
+}
+
+/* Footer */
+
+body.page-rooms:not(.staff-page) > footer {
+  background: #1d2822;
+  color: #f2eadb;
+}
+
+body.page-rooms:not(.staff-page) > footer h2,
+body.page-rooms:not(.staff-page) > footer h3,
+body.page-rooms:not(.staff-page) > footer a {
+  color: #f2eadb;
+}
+
+body.page-rooms:not(.staff-page) > footer p,
+body.page-rooms:not(.staff-page) > footer .footer-bottom {
+  color: #cbcbbc;
+  border-color: #ffffff25;
+}
+
+/* Responsive */
+
+@media (max-width: 1250px) {
+  body.page-rooms:not(.staff-page) {
+    --rooms-header-height: 136px;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header .menu-toggle {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid #cdbb9d;
+    border-radius: 0;
+    background: transparent;
+    color: #514539;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header #main-nav {
+    inset: 100% 0 auto;
+    display: none;
+    width: 100%;
+    max-height: calc(100dvh - var(--rooms-header-height));
+    padding: 24px 6%;
+    overflow-y: auto;
+    background: #faf7f1;
+    border-top: 1px solid #e5dbcc;
+    border-bottom: 1px solid #dfd4c3;
+    box-shadow: 0 14px 24px #4b382114;
+    pointer-events: auto;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header #main-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header #main-nav > a {
+    display: block;
+    padding: 13px 0;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header #main-nav .nav-logout {
+    justify-content: flex-start;
+    padding: 13px 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  body.page-rooms:not(.staff-page) .search-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.page-rooms:not(.staff-page) .search-bar .button {
+    grid-column: 1 / -1;
+  }
+
+  body.page-rooms:not(.staff-page) .room-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+
+  body.page-rooms:not(.staff-page) .room-price {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 8px 24px;
+    border-left: 0;
+    border-top: 1px solid var(--rooms-line);
+  }
+
+  body.page-rooms:not(.staff-page) .room-price .badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-bottom: 10px;
+  }
+
+  body.page-rooms:not(.staff-page) .room-price h3,
+  body.page-rooms:not(.staff-page) .room-price > small,
+  body.page-rooms:not(.staff-page) .room-price > p {
+    grid-column: 1;
+  }
+
+  body.page-rooms:not(.staff-page) .room-price > p {
+    margin: 12px 0 0;
+  }
+
+  body.page-rooms:not(.staff-page) .room-price .button {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+    margin: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  body.page-rooms:not(.staff-page) .page-heading {
+    padding: 42px 5%;
+  }
+
+  body.page-rooms:not(.staff-page) .section.compact {
+    width: 92%;
+    padding-top: 24px;
+  }
+
+  body.page-rooms:not(.staff-page) .search-bar {
+    gap: 20px 14px;
+    padding: 20px;
+  }
+
+  body.page-rooms:not(.staff-page) .room-row {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-rooms:not(.staff-page) .room-row > img {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  body.page-rooms:not(.staff-page) .room-info,
+  body.page-rooms:not(.staff-page) .room-price {
+    padding: 24px;
+  }
+
+  body.page-rooms:not(.staff-page) .room-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  body.page-rooms:not(.staff-page) .room-price .badge {
+    margin-bottom: 18px;
+  }
+
+  body.page-rooms:not(.staff-page) .room-price > p {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body.page-rooms:not(.staff-page) .site-header .brand {
+    width: 220px;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header .brand > span:last-child {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header .brand small {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+}
+
+@media (max-width: 380px) {
+  body.page-rooms:not(.staff-page) .search-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-rooms:not(.staff-page) *,
+  body.page-rooms:not(.staff-page) *::before,
+  body.page-rooms:not(.staff-page) *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+/* Ảnh phòng có thể bấm để mở chi tiết */
+body.page-rooms:not(.staff-page) .room-photo-link {
+  position: relative;
+  display: block;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 330px;
+  overflow: hidden;
+  background: #eee7dc;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Ảnh phủ kín khung, không làm thay đổi kích thước hàng */
+body.page-rooms:not(.staff-page) .room-photo-link > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Phóng nhẹ khi rê chuột */
+@media (hover: hover) and (pointer: fine) {
+  body.page-rooms:not(.staff-page) .room-photo-link:hover > img {
+    transform: scale(1.06);
+  }
+}
+
+/* Hỗ trợ chọn ảnh bằng phím Tab */
+body.page-rooms:not(.staff-page) .room-photo-link:focus-visible {
+  outline: 3px solid #af8c51;
+  outline-offset: -5px;
+}
+
+body.page-rooms:not(.staff-page) .room-photo-link:focus-visible > img {
+  transform: scale(1.06);
+}
+
+/* Điện thoại: giữ tỉ lệ ảnh 4:3 */
+@media (max-width: 700px) {
+  body.page-rooms:not(.staff-page) .room-photo-link {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Không chạy chuyển động nếu người dùng yêu cầu giảm hiệu ứng */
+@media (prefers-reduced-motion: reduce) {
+  body.page-rooms:not(.staff-page) .room-photo-link > img {
+    transition: none;
+    transform: none !important;
+  }
+}
+/* Ảnh nền đầu trang phòng */
+body.page-rooms:not(.staff-page) {
+  --rooms-hero-header-height: 154px;
+}
+
+body.page-rooms:not(.staff-page) .topline {
+  display: none;
+}
+
+body.page-rooms:not(.staff-page) #main-content {
+  padding-top: 0;
+}
+
+body.page-rooms:not(.staff-page) .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--rooms-hero-header-height);
+  z-index: 1000;
+
+  background: transparent;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+  box-shadow: none;
+
+  transition:
+    background-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+body.page-rooms:not(.staff-page) .site-header.is-scrolled {
+  background: #202522;
+  border-bottom-color: rgb(215 189 134 / 20%);
+  box-shadow: 0 5px 20px rgb(0 0 0 / 12%);
+}
+
+/* Chữ trắng trên nền ảnh */
+body.page-rooms:not(.staff-page) .site-header .brand,
+body.page-rooms:not(.staff-page) .site-header .brand > span:last-child,
+body.page-rooms:not(.staff-page) .site-header #main-nav > a,
+body.page-rooms:not(.staff-page) .site-header .nav-logout-button,
+body.page-rooms:not(.staff-page) .site-header .menu-toggle {
+  color: #fff8ec;
+}
+
+body.page-rooms:not(.staff-page) .site-header .brand-symbol,
+body.page-rooms:not(.staff-page) .site-header .brand small {
+  color: #dfc38f;
+}
+
+body.page-rooms:not(.staff-page) .site-header #main-nav > a:hover,
+body.page-rooms:not(.staff-page) .site-header .nav-logout-button:hover {
+  color: #dfc38f;
+}
+
+/* Khung ảnh */
+body.page-rooms:not(.staff-page) .rooms-hero {
+  position: relative;
+  isolation: isolate;
+
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  min-height: 680px;
+  min-height: max(680px, 100svh);
+  margin: 0;
+  padding: calc(var(--rooms-hero-header-height) + 50px) 6% 90px;
+
+  overflow: hidden;
+  background: #26352d;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Lớp phủ giúp chữ dễ đọc */
+body.page-rooms:not(.staff-page) .rooms-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 48%) 0%,
+    rgb(0 0 0 / 25%) 40%,
+    rgb(0 0 0 / 52%) 100%
+  );
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-content {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero .eyebrow {
+  margin: 0 0 28px;
+  color: #eed4a0;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.8;
+  letter-spacing: 4px;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero h1 {
+  margin: 0;
+  padding: 0;
+  color: #fff8ef;
+
+  font-family: "Times New Roman", serif;
+  font-size: clamp(44px, 6vw, 88px);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero p {
+  max-width: 650px;
+  margin: 28px auto 36px;
+  color: #f4eddf;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-style: normal;
+  line-height: 1.9;
+  text-align: center;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 54px;
+  padding: 15px 28px;
+  border: 1px solid #e5cfa2;
+  border-radius: 0;
+  background: #ad873d;
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+
+  transition: background-color 200ms ease;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-button:hover {
+  background: #927031;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+
+body.page-rooms:not(.staff-page) #rooms-search {
+  scroll-margin-top: calc(var(--rooms-hero-header-height) + 20px);
+}
+
+/* Menu trên màn hình nhỏ */
+@media (max-width: 1250px) {
+  body.page-rooms:not(.staff-page) {
+    --rooms-hero-header-height: 118px;
+  }
+
+  body.page-rooms:not(.staff-page) .site-header #main-nav.open {
+    top: 100%;
+    background: #202522;
+    border-bottom: 1px solid rgb(215 189 134 / 20%);
+    max-height: calc(100dvh - var(--rooms-hero-header-height));
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  body.page-rooms:not(.staff-page) .rooms-hero {
+    min-height: max(580px, 100svh);
+    padding: calc(var(--rooms-hero-header-height) + 40px) 22px 60px;
+  }
+
+  body.page-rooms:not(.staff-page) .rooms-hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  body.page-rooms:not(.staff-page) .rooms-hero h1 {
+    font-size: clamp(42px, 10vw, 60px);
+  }
+
+  body.page-rooms:not(.staff-page) .rooms-hero p {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-rooms:not(.staff-page) .site-header,
+  body.page-rooms:not(.staff-page) .rooms-hero-button {
+    transition: none;
+  }
+}
+/* Banner thấp hơn, bố cục giống trang chi tiết phòng */
+body.page-rooms:not(.staff-page) .rooms-hero {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  width: 100%;
+  height: 560px;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+
+  padding: calc(var(--rooms-hero-header-height, 154px) + 32px) 8% 48px;
+
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #26352d;
+  text-align: left;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Phủ tối vừa đủ để đọc chữ */
+body.page-rooms:not(.staff-page) .rooms-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 40%) 0%,
+    rgb(0 0 0 / 12%) 40%,
+    rgb(0 0 0 / 60%) 100%
+  );
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1000px;
+  margin: 0;
+  text-align: left;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero .eyebrow {
+  margin: 0 0 16px;
+  color: #e4c58d;
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 3px;
+  text-align: left;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero h1 {
+  margin: 0;
+  padding: 0;
+  color: #fff8ef;
+
+  font-family: "Times New Roman", serif;
+  font-size: clamp(38px, 4.5vw, 64px);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  text-align: left;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero p {
+  max-width: 650px;
+  margin: 18px 0 22px;
+  color: #f1e8da;
+
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  line-height: 1.8;
+  text-align: left;
+}
+
+/* Liên kết gạch chân, thay cho nút vàng lớn */
+body.page-rooms:not(.staff-page) .rooms-hero-button {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+  min-height: 0;
+  margin: 0;
+  padding: 5px 0 9px;
+
+  border: 0;
+  border-bottom: 1px solid #d4b477;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff2d9;
+
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+}
+
+body.page-rooms:not(.staff-page) .rooms-hero-button:hover {
+  border-bottom-color: #fff;
+  background: transparent;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  body.page-rooms:not(.staff-page) .rooms-hero {
+    height: 460px;
+    min-height: 0;
+    padding: calc(var(--rooms-hero-header-height, 118px) + 24px) 24px 32px;
+  }
+
+  body.page-rooms:not(.staff-page) .rooms-hero h1 {
+    font-size: 38px;
+  }
+
+  body.page-rooms:not(.staff-page) .rooms-hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  body.page-rooms:not(.staff-page) .rooms-hero p {
+    font-size: 14px;
+  }
+}
