@@ -1,0 +1,819 @@
+/* THE ONYX & IVORY — TRA CỨU, ĐĂNG NHẬP, ĐĂNG KÝ */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) {
+  --customer-header-height: 150px;
+  --customer-paper: #faf8f3;
+  --customer-ink: #40382f;
+  --customer-gold: #a48249;
+  --customer-line: #ded6c7;
+  --customer-green: #24382e;
+
+  margin: 0;
+  background: var(--customer-paper);
+  color: var(--customer-ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) *,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) *::before,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) *::after {
+  box-sizing: border-box;
+  font-style: normal !important;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) h1,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) h2,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.3;
+}
+
+/* Thanh điều hướng */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) .topline {
+  background: #eee7dc;
+  color: #514539;
+  border-bottom: 1px solid #ded3c2;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: var(--customer-header-height);
+  padding: 0 5%;
+  overflow: visible;
+  background: #faf7f1;
+  color: var(--customer-ink);
+  border-bottom: 1px solid var(--customer-line);
+  box-shadow: 0 4px 18px #40382f0d;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 260px;
+  margin: 0;
+  padding: 0;
+  color: var(--customer-ink);
+  text-align: center;
+  text-decoration: none;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .brand-symbol {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: #af8c51;
+  font:
+    400 50px/1 "Times New Roman",
+    serif;
+  letter-spacing: -4px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .brand-symbol
+  > span {
+  font-size: 29px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .brand
+  > span:last-child {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--customer-ink);
+  font:
+    400 19px/1.5 "Times New Roman",
+    serif;
+  letter-spacing: 1.5px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .brand
+  small {
+  display: block;
+  margin-top: 5px;
+  color: #8a7555;
+  font:
+    8px/1.5 Arial,
+    sans-serif;
+  letter-spacing: 3px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  #main-nav {
+  position: absolute;
+  inset: 0 5%;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr))
+    280px
+    repeat(3, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > * {
+  grid-row: 1;
+  min-width: 0;
+  max-width: 100%;
+  pointer-events: auto;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > :nth-child(1) {
+  grid-column: 1;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > :nth-child(2) {
+  grid-column: 2;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > :nth-child(3) {
+  grid-column: 3;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > :nth-child(4) {
+  grid-column: 5;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > :nth-child(5) {
+  grid-column: 6;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  #main-nav
+  > :nth-child(6) {
+  grid-column: 7;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  #main-nav
+  > a,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .nav-logout-button {
+  color: #514539;
+  font:
+    400 13px/1.6 Arial,
+    sans-serif;
+  text-decoration: none;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  #main-nav
+  > a:hover,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .nav-logout-button:hover {
+  color: var(--customer-gold);
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  #main-nav
+  .nav-user {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  #main-nav
+  .nav-logout {
+  justify-content: center;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .site-header
+  .menu-toggle {
+  display: none;
+}
+
+/* Đánh dấu mục đang xem */
+
+body.page-lookup:not(.staff-page) #main-nav > :nth-child(4),
+body.page-login:not(.staff-page) #main-nav > :nth-child(5),
+body.page-register:not(.staff-page) #main-nav > :nth-child(6) {
+  color: #967443;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+}
+
+/* Nội dung */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main {
+  min-height: 60vh;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main [id] {
+  scroll-margin-top: calc(var(--customer-header-height) + 20px);
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .eyebrow {
+  color: #967443;
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: 2.5px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main h1 {
+  margin: 20px 0;
+  color: var(--customer-ink);
+  font-size: clamp(34px, 4vw, 50px);
+  text-align: center;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main h2 {
+  margin: 0 0 24px;
+  color: var(--customer-ink);
+  font-size: 30px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main p {
+  color: #756e63;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main small {
+  color: #827867;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* Tiêu đề tra cứu */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .page-heading {
+  padding: 44px 6% 38px;
+  border-bottom: 1px solid var(--customer-line);
+  background: #f0ece3;
+  text-align: center;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  .page-heading
+  p {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Khung trang đăng nhập và đăng ký */
+
+body:is(.page-login, .page-register):not(.staff-page) main .section.narrow {
+  width: min(660px, 90%);
+  max-width: none;
+  margin-inline: auto;
+  padding: 48px 0 70px;
+}
+
+body:is(.page-login, .page-register):not(.staff-page)
+  main
+  .section.narrow
+  > .eyebrow,
+body:is(.page-login, .page-register):not(.staff-page) main .section.narrow > p {
+  text-align: center;
+}
+
+/* Khung trang tra cứu */
+
+body.page-lookup:not(.staff-page) main .section.narrow {
+  width: min(760px, 90%);
+  max-width: none;
+  margin-inline: auto;
+  padding: 38px 0 75px;
+}
+
+/* Các biểu mẫu và kết quả */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .panel {
+  min-width: 0;
+  margin: 24px 0;
+  padding: 34px;
+  border: 1px solid var(--customer-line);
+  border-radius: 4px;
+  background: #fffdf8;
+  box-shadow: 0 12px 35px rgba(64, 56, 47, 0.04);
+  text-align: left;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main label {
+  display: block;
+  margin-bottom: 20px;
+  color: #514539;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main select,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  margin-top: 8px;
+  padding: 13px 15px;
+  border: 1px solid #d8cebd;
+  border-radius: 3px;
+  background: #fffefb;
+  color: var(--customer-ink);
+  font:
+    16px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: normal;
+}
+
+/* Chừa chỗ cho nút hiện/ẩn mật khẩu đang có */
+
+body:is(.page-login, .page-register):not(.staff-page)
+  main
+  input[type="password"],
+body:is(.page-login, .page-register):not(.staff-page)
+  main
+  input[autocomplete="current-password"],
+body:is(.page-login, .page-register):not(.staff-page)
+  main
+  input[autocomplete="new-password"] {
+  padding-right: 80px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  input::placeholder,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  textarea::placeholder {
+  color: #978b78;
+  opacity: 1;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  input:focus-visible,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  select:focus-visible,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  textarea:focus-visible {
+  outline: 2px solid #b89a65;
+  outline-offset: 2px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  a:focus-visible,
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  button:focus-visible {
+  outline: 2px solid #a48249;
+  outline-offset: 4px;
+}
+
+/* Màu trường được trình duyệt tự điền */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  input:-webkit-autofill {
+  -webkit-text-fill-color: #40382f;
+  -webkit-box-shadow: 0 0 0 1000px #f4efe5 inset;
+  caret-color: #40382f;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  textarea {
+  resize: vertical;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  input[type="checkbox"],
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  input[type="radio"] {
+  accent-color: #967443;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .checkbox
+  input {
+  flex: 0 0 auto;
+  width: auto;
+  margin-top: 5px;
+}
+
+/* Nút chính — không áp dụng lên nút hiện/ẩn mật khẩu */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 14px 22px;
+  border: 1px solid var(--customer-green);
+  border-radius: 2px;
+  background: var(--customer-green);
+  color: #fffaf2;
+  font:
+    12px/1.6 Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .button:not(:disabled):hover {
+  border-color: #967443;
+  background: #967443;
+  color: #fff;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .button.full {
+  width: 100%;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .button.outline {
+  border-color: #b49a72;
+  background: transparent;
+  color: #806136;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .button.outline:not(:disabled):hover {
+  background: #967443;
+  color: #fff;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .text-link {
+  display: inline-block;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #b49a72;
+  color: #806136;
+  text-decoration: none;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .text-link:hover {
+  color: #40382f;
+  border-bottom-color: #40382f;
+}
+
+/* Thông báo */
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .notice {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border: 1px solid #e1d6c3;
+  border-left: 3px solid #b49a72;
+  border-radius: 3px;
+  background: #f4efe5;
+  color: #68583e;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .notice.error {
+  border-color: #ebccc4;
+  border-left-color: #ac6352;
+  background: #fbf0ec;
+  color: #873f30;
+}
+
+body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+  main
+  .notice.success {
+  border-color: #cbdccc;
+  border-left-color: #527452;
+  background: #edf4eb;
+  color: #355535;
+}
+
+/* Chi tiết đơn sau khi tra cứu */
+
+body.page-lookup:not(.staff-page) main .panel dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 16px 24px;
+  margin: 26px 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--customer-line);
+  border-bottom: 1px solid var(--customer-line);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+body.page-lookup:not(.staff-page) main .panel dt {
+  color: #827867;
+}
+
+body.page-lookup:not(.staff-page) main .panel dd {
+  min-width: 0;
+  margin: 0;
+  color: #40382f;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+body.page-lookup:not(.staff-page) main .panel > .badge {
+  margin-bottom: 20px;
+}
+
+/* Menu thu gọn */
+
+@media (max-width: 1250px) {
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page) {
+    --customer-header-height: 118px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .brand {
+    width: 230px;
+    gap: 5px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .brand-symbol {
+    font-size: 44px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .brand
+    > span:last-child {
+    font-size: 16px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .menu-toggle {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: block;
+    padding: 7px 12px;
+    border: 1px solid #cdbb9d;
+    background: transparent;
+    color: #514539;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    #main-nav {
+    inset: 100% 0 auto;
+    display: none;
+    max-height: calc(100dvh - var(--customer-header-height));
+    padding: 24px 6%;
+    overflow-y: auto;
+    background: #faf7f1;
+    border-bottom: 1px solid var(--customer-line);
+    box-shadow: 0 14px 24px #4b382114;
+    pointer-events: auto;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    #main-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    #main-nav
+    .nav-logout {
+    justify-content: flex-start;
+  }
+}
+
+/* Điện thoại */
+
+@media (max-width: 600px) {
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .brand {
+    width: 210px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .brand
+    > span:last-child {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .site-header
+    .brand
+    small {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    .page-heading {
+    padding: 32px 5%;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page) main h1 {
+    font-size: 34px;
+  }
+
+  body:is(.page-login, .page-register):not(.staff-page) main .section.narrow,
+  body.page-lookup:not(.staff-page) main .section.narrow {
+    width: 92%;
+    padding: 30px 0 50px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    main
+    .panel {
+    padding: 24px 20px;
+  }
+
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    main
+    .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  body.page-lookup:not(.staff-page) main .panel dl {
+    gap: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  body.page-lookup:not(.staff-page) main .panel dl {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-lookup:not(.staff-page) main .panel dd {
+    margin-bottom: 12px;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:is(.page-lookup, .page-login, .page-register):not(.staff-page)
+    main
+    .button {
+    transition: none;
+  }
+}
+/* Căn giữa phần giới thiệu trang tra cứu */
+body.page-lookup:not(.staff-page) .page-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+body.page-lookup:not(.staff-page) .page-heading .eyebrow {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+body.page-lookup:not(.staff-page) .page-heading h1 {
+  width: 100%;
+  margin: 0;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.3;
+  text-align: center;
+}
+
+body.page-lookup:not(.staff-page) .page-heading p {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+body.page-lookup:not(.staff-page) .page-heading em {
+  font-style: normal;
+}
+
+@media (max-width: 600px) {
+  body.page-lookup:not(.staff-page) .page-heading {
+    padding: 32px 20px;
+    gap: 12px;
+  }
+}

@@ -305,7 +305,7 @@ require __DIR__ . '/includes/header.php';
         <strong>02 THÔNG TIN</strong>
         &nbsp; — &nbsp; 03 HOÀN TẤT
     </div>
-    <h1>Kỳ nghỉ <em>của bạn.</em></h1>
+    <h1>Kỳ nghỉ <em>của bạn</em></h1>
 
     <a class="text-link" href="<?= e($backToRoomsUrl) ?>">
         ← Quay lại danh sách phòng
